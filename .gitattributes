@@ -1,0 +1,18 @@
+# Treat PDF files as binary
+*.pdf binary
+
+# Excel files เป็น binary เช่นกัน
+*.xlsx binary
+*.xls binary
+
+# Robot Framework test files = text (normalize line endings เป็น LF)
+*.robot text eol=lf
+
+# Python scripts = text
+*.py text eol=lf
+
+# Logs ไม่ต้อง normalize
+*.log -text
+
+# Default: normalize text files
+* text=auto

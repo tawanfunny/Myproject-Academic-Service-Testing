@@ -1,0 +1,97 @@
+*** Settings ***
+Library    SeleniumLibrary
+Library    XML
+Resource    TC17_Choice_ApprovedRequest.robot
+
+*** Keywords ***
+Go To Academic_Services
+    [Arguments]    ${row}
+    Open Excel Document    ${datatable}    TC17-EC
+    Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    0.1
+
+Login As Lecturer
+    Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
+    Click Element    //a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]
+    Input Text    //input[@id='lecname']     sayan@gmaejo.mju.ac.th
+    Input Text    //input[@id='lecpwd']   itscimju  
+    Click Button    //body/form[1]/input[3]
+    Handle Alert    ACCEPT 
+
+Go To Approved Request
+    [Arguments]    ${i}
+    Click Element    //body/div[1]/div[1]/div[2]/a[1]
+    # Select From List By Value    css:#statusApprove    pending
+    Click Element    //tbody/tr[${i}+6]/td[8]/a[1]/img[1]
+    Sleep    2s
+
+Fill Comment Form
+    [Arguments]    ${i}
+    ${PreApprovalComments}=    Read Excel Cell    ${i}    2
+    ${PreApprovalComments}=    Evaluate    '' if $PreApprovalComments in ['None', '', None] else $PreApprovalComments
+    Input Text    css:#commentReqDetail    ${PreApprovalComments}
+
+
+Actions in the options and alerts section
+    [Arguments]    ${i}
+    ${Action}=    Read Excel Cell    ${i}    3
+    Run Keyword If    '${Action}' == 'กดปุ่มไม่อนุมัติ'    Run Keyword And Ignore Error    Click Element    //button[@type='submit'][2]
+    Run Keyword If    '${Action}' == 'กดปุ่มอนุมัติ'  Run Keyword And Ignore Error    Click Element    //button[@type='submit'][1]
+    Sleep    2
+
+    ${OC}=    Read Excel Cell    ${i}    4
+    Run Keyword If    '${OC}' == 'กดปุ่ม Ok'      Handle Alert    ACCEPT
+    Run Keyword If    '${OC}' == 'กดปุ่ม Cancel'  Handle Alert    DISMISS
+    Sleep    2
+
+    Run Keyword If    '${OC}' == 'กดปุ่ม Cancel'
+    ...    Click Element    //div[3]//a[1]
+    Sleep    2
+
+    # ถ้ากด OK → รอให้ระบบ redirect เสร็จ แล้วกลับมาหน้ารายการ
+    Run Keyword If    '${OC}' == 'กดปุ่ม Ok'
+    ...    Click Element    //body/div[1]/div[1]/div[2]/a[1]
+    Sleep    2
+  
+Read Expected Result From Excel
+    [Arguments]    ${row}
+    ${ExpectedResult}=    Read Excel Cell    ${row}    5
+    Set Suite Variable    ${ExpectedResult}
+    Log To Console        Expected Result: ${ExpectedResult}
+
+Read text from the screen and write it in Excel
+    [Arguments]    ${i}
+    Wait Until Element Is Visible    xpath=//tbody/tr[${i}+6]/td[7]/span    10s
+    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    xpath=//tbody/tr[${i}+6]/td[7]/span
+    Sleep    2
+    Scroll Element Into View   //tbody/tr[${i}+6]/td[7]/span
+    Capture Page Screenshot    Project_Test_AcademicService/TC17_ApprovedRequest/Screenshots_Choice_ApprovedRequest/${i}_${ActualMessage}.png
+    write Excel Cell    ${i}    7    ${ActualMessage}
+    Log To Console    Actual Message: ${ActualMessage}
+    Set Suite Variable    ${ActualMessage}
+
+Compare Result And Write Status
+    [Arguments]    ${row}
+    ${is_pass}=    Run Keyword And Return Status    Should Contain    ${ActualMessage}    ${ExpectedResult}
+    Run Keyword If    ${is_pass}         Write Excel Cell    ${row}    8    Pass
+    Run Keyword If    not ${is_pass}     Write Excel Cell    ${row}    8    Fail
+    
+    Run Keyword    Write Suggestion Based On Comparison    ${row}    ${ExpectedResult}    ${ActualMessage}
+
+
+Write Suggestion Based On Comparison
+    [Arguments]    ${row}    ${ExpectedResult}    ${ActualMessage}
+    ${ExpectedResult}=    Evaluate    '''${ExpectedResult}'''.strip()
+    ${ActualMessage}=     Evaluate    '''${ActualMessage}'''.strip()
+    ${is_match}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
+    Run Keyword If    ${is_match}
+    ...    Write Excel Cell    ${row}    10    ข้อความแสดงผลถูกต้อง
+    ...    ELSE
+    ...    Write Excel Cell    ${row}    10    ข้อความไม่ตรงตามที่คาดหวังไว้ ควรแก้ไขเป็น ${ExpectedResult}
+
+
+Go To Logout
+    Click Element    //a[contains(text(),'ออกจากระบบ')]
+    Sleep    1s
+    
