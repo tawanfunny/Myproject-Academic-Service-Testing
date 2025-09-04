@@ -21,7 +21,7 @@ ${browser}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    3
@@ -35,6 +35,7 @@ TC18: 18_ActionAlertMessage_ApprovedProposal
     [Tags]    ActionAlertMessage_ApprovedProposal
     Go To Academic_Services    ${datatable}
     FOR    ${i}    IN RANGE    2    ${rows}+1
+        Setup Speed
         Login As Lecturer
         Go To Approved Proposal    ${i}
         Fill Comment Form    ${i}    

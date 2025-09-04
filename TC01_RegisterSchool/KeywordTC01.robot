@@ -7,14 +7,16 @@ Library    Screenshot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC01-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+   
 
-Run Regsiter_School
+Run Register_School
     [Arguments]    ${row}
     ${ALLOW}=    Read Excel Cell    ${row}    16
     ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
@@ -22,7 +24,8 @@ Run Regsiter_School
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Registration Page
+    ...    Setup Speed
+    ...    AND    Go To Registration Page
     ...    AND    Fill School Registration Form    ${row}
     ...    AND    Handle Submission Result    ${row}
     ...    AND    Validate And Write Result    ${row}
@@ -106,7 +109,7 @@ Handle Submission Result
         ${ActualMessage}=    Set Variable    ${alert_text[1]}
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found 
-        Capture Page Screenshot    Project_Test_AcademicService/TC01_RegisterSchool/Screenshots_AlertNotFound/${row}_${ActualMessage}.png
+        Capture Page Screenshot    TC01_RegisterSchool/Screenshots_AlertNotFound/${row}_${ActualMessage}.png
     END
     Set Test Variable    ${ActualMessage}
     Sleep    1
@@ -128,10 +131,10 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${row}    15    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC01_RegisterSchool/Screenshots_Pass/${row}_${ActualMessage}.png
+        Capture Page Screenshot    TC01_RegisterSchool/Screenshots_Pass/${row}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${row}    15    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC01_RegisterSchool/Screenshots_Fail/${row}_${ActualMessage}.png
+        Capture Page Screenshot    TC01_RegisterSchool/Screenshots_Fail/${row}_${ActualMessage}.png
     END
     
     Run Keyword    Write Suggestion Based On Comparison    ${row}    ${ExpectedResult}    ${ActualMessage}

@@ -4,8 +4,8 @@ Resource    TC04_CancelService.robot
 
 
 *** Keywords ***
-
-
+Setup Speed
+    Set Selenium Speed    0.2
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -33,8 +33,9 @@ Run CancelService
     ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
     Log To Console    Row ${row} - Allow: ${ALLOW}
     Run Keyword If    '${ALLOW}' == 'Y'
-    ...    Run Keywords   
-    ...    Button Cancel Request Page    ${row}
+    ...    Run Keywords  
+    ...    Setup Speed 
+    ...    AND    Button Cancel Request Page    ${row}
     ...    AND    Fill Cancel Request Form    ${row}
     ...    AND    Submit Cancel Form
     ...    AND    Handle Submission Result    ${row}
@@ -81,7 +82,7 @@ Handle Submission Result
         ELSE
             ${ActualMessage}=    Set Variable    Alert not found
             Sleep    2
-            Capture Page Screenshot    Project_Test_AcademicService/TC04_CancelService/Screenshots_AlertNotFound/${i}_AlertNotFound.png
+            Capture Page Screenshot    TC04_CancelService/Screenshots_AlertNotFound/${i}_AlertNotFound.png
             
         END
         Run Keyword And Ignore Error    Click Element    //body/form[1]/div[1]/div[1]/div[3]/a[1]
@@ -102,10 +103,10 @@ Validate And Write Result
         ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
         IF    ${compare_result}
             Write Excel Cell    ${i}    8    PASS
-            Capture Page Screenshot    Project_Test_AcademicService/TC04_CancelService/Screenshots_Pass/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC04_CancelService/Screenshots_Pass/${i}_${ActualMessage}.png
         ELSE
             Write Excel Cell    ${i}    8    FAIL
-            Capture Page Screenshot    Project_Test_AcademicService/TC04_CancelService/Screenshots_Fail/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC04_CancelService/Screenshots_Fail/${i}_${ActualMessage}.png
         END
         
         Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

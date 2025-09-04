@@ -4,12 +4,15 @@ Library    XML
 Resource    TC17_Choice_ApprovedRequest.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC17-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+   
 
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -23,7 +26,7 @@ Go To Approved Request
     [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[2]/a[1]
     # Select From List By Value    css:#statusApprove    pending
-    Click Element    //tbody/tr[${i}+6]/td[8]/a[1]/img[1]
+    Click Element    //tbody/tr[${i}]/td[8]/a[1]/img[1]
     Sleep    2s
 
 Fill Comment Form
@@ -41,8 +44,8 @@ Actions in the options and alerts section
     Sleep    2
 
     ${OC}=    Read Excel Cell    ${i}    4
-    Run Keyword If    '${OC}' == 'กดปุ่ม Ok'      Handle Alert    ACCEPT
-    Run Keyword If    '${OC}' == 'กดปุ่ม Cancel'  Handle Alert    DISMISS
+    Run Keyword If    '${OC}' == 'กดปุ่ม Ok'    Handle Alert    ACCEPT
+    Run Keyword If    '${OC}' == 'กดปุ่ม Cancel'    Handle Alert    DISMISS
     Sleep    2
 
     Run Keyword If    '${OC}' == 'กดปุ่ม Cancel'
@@ -62,11 +65,12 @@ Read Expected Result From Excel
 
 Read text from the screen and write it in Excel
     [Arguments]    ${i}
-    Wait Until Element Is Visible    xpath=//tbody/tr[${i}+6]/td[7]/span    10s
-    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    xpath=//tbody/tr[${i}+6]/td[7]/span
-    Sleep    2
-    Scroll Element Into View   //tbody/tr[${i}+6]/td[7]/span
-    Capture Page Screenshot    Project_Test_AcademicService/TC17_ApprovedRequest/Screenshots_Choice_ApprovedRequest/${i}_${ActualMessage}.png
+    # Wait Until Element Is Visible    xpath=//tbody/tr[${i}]/td[7]/span    10s
+    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    //tbody/tr[${i}]/td[7]/span
+    Scroll Element Into View   //tbody/tr[${i}]/td[7]/span
+    Sleep    3
+    Capture Page Screenshot    TC17_ApprovedRequest/Screenshots_Choice_ApprovedRequest/${i}_${ActualMessage}.png
+    
     write Excel Cell    ${i}    7    ${ActualMessage}
     Log To Console    Actual Message: ${ActualMessage}
     Set Suite Variable    ${ActualMessage}

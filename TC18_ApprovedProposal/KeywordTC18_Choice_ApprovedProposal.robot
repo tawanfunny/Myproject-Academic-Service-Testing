@@ -4,12 +4,15 @@ Resource    TC18_Choice_ApprovedProposal.robot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC18-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.2
+
 
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -56,8 +59,8 @@ Read text from the screen and write it in Excel
     ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    xpath=//tbody/tr[${i}+2]/td[8]/span[1]
     Sleep    2
     Execute JavaScript    window.scrollTo(0, 300)
-    Capture Page Screenshot    Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}.png
-    Capture Element Screenshot    xpath=//tbody/tr[${i}+2]/td[8]/span[1]    Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}_Zoom.png
+    Capture Page Screenshot    TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}.png
+    Capture Element Screenshot    xpath=//tbody/tr[${i}+2]/td[8]/span[1]    TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}_Zoom.png
     write Excel Cell    ${i}    6    ${ActualMessage}
     Log To Console    Actual Message: ${ActualMessage}
     Set Suite Variable    ${ActualMessage}

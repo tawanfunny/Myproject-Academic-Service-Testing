@@ -4,12 +4,15 @@ Library    Screenshot
 Resource    TC08_Data_LoginStudent.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC08-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+
 
 Run Data_LoginStudent
     [Arguments]    ${row}
@@ -19,7 +22,8 @@ Run Data_LoginStudent
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To StudentLogin Page
+    ...    Setup Speed
+    ...    AND    Go To StudentLogin Page
     ...    AND    Fill Student Login Form    ${row}
     ...    AND    Handle Submission Result   ${row}
     ...    AND    Validate Database For Login    ${row}    ${UNStudent}    ${PWDStudent}
@@ -62,7 +66,7 @@ Handle Submission Result
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
         Sleep    2
-        Capture Page Screenshot    Project_Test_AcademicService/TC08_LoginStudent/Screenshots_Data_AlertNotFound/${i}_AlertNotFound.png
+        Capture Page Screenshot    TC08_LoginStudent/Screenshots_Data_AlertNotFound/${i}_AlertNotFound.png
         Run Keyword And Ignore Error    Click Element    css:a.back-home-link:nth-child(8)
     END
 
@@ -110,10 +114,10 @@ Compare Result And Write Status
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${i}    8    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC08_LoginStudent/Screenshots_Data_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC08_LoginStudent/Screenshots_Data_Pass/${i}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${i}    8    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC08_LoginStudent/Screenshots_Data_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC08_LoginStudent/Screenshots_Data_Fail/${i}_${ActualMessage}.png
     END
 
    Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

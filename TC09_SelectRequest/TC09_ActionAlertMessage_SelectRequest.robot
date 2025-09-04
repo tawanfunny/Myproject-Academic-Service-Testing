@@ -18,7 +18,7 @@ ${browser}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    2
@@ -30,10 +30,10 @@ ${cols}    8
 TC09: 09_SelectRequest
     [Documentation]    Test_09_ActionAlertMessage_SelectRequest
     [Tags]    ActionAlertMessage_SelectRequest
-    Set Selenium Speed    3
     Open Excel Document    ${datatable}    TC09-EC 
     
     FOR     ${i}    IN RANGE    2    ${rows}+1
+        Setup Speed
         Clear Select Data In DB    ${i}
         Go To Academic_Services    ${i}
         Login As Student

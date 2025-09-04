@@ -3,12 +3,15 @@ Library    SeleniumLibrary
 Resource    TC06_EditProfile.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC06-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.2
+
 
 Go To Login Page
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -28,7 +31,8 @@ Run EditFrofile
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Edit Proflie
+    ...    Setup Speed
+    ...    AND    Go To Edit Proflie
     ...    AND    Fill Edit School Registration Form    ${row}
     ...    AND    Handle Submission Result    ${row}
     ...    AND    Validate And Write Result    ${row}
@@ -113,7 +117,7 @@ Handle Submission Result
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
         Sleep    2
-        Capture Page Screenshot    Project_Test_AcademicService/TC06_EditProfile/Screenshots_AlertNotFound/${row}_AlertNotFound.png 
+        Capture Page Screenshot    TC06_EditProfile/Screenshots_AlertNotFound/${row}_AlertNotFound.png 
     END
     Run Keyword And Ignore Error    Mouse Over    css:a:nth-child(1)
     Run Keyword And Ignore Error    Click Element    css:a:nth-child(1)
@@ -134,10 +138,10 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${row}    15    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC06_EditProfile/Screenshots_Pass/${row}_${ActualMessage}.png
+        Capture Page Screenshot    TC06_EditProfile/Screenshots_Pass/${row}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${row}    15    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC06_EditProfile/Screenshots_Fail/${row}_${ActualMessage}.png
+        Capture Page Screenshot    TC06_EditProfile/Screenshots_Fail/${row}_${ActualMessage}.png
     END
     Run Keyword    Write Suggestion Based On Comparison    ${row}    ${ExpectedResult}    ${ActualMessage}
 

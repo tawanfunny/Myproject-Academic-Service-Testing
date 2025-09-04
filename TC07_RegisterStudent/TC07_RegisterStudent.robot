@@ -22,7 +22,6 @@ ${cols}    12
 TC07: 07_Data_RegisterStudent
     [Documentation]    Test_07_Data_RegisterStudent
     [Tags]    Register_Student
-    Set Selenium Speed    0.5
     Go To Academic_Services    ${datatable}
 
     FOR    ${i}    IN RANGE    2    ${rows}+1

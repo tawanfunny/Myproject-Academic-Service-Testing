@@ -19,7 +19,7 @@ ${BROWSER}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    7
@@ -29,7 +29,7 @@ ${cols}    8
 TC08: 08_Database_LoginStudent
     [Documentation]    Test_08_Database_LoginStudent
     [Tags]    Login_Database_Student
-    Set Selenium Speed    1
+   
     Go To Academic_Services    ${datatable}
 
     FOR    ${i}    IN RANGE    2    ${rows}+1

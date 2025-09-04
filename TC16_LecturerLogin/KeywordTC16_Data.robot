@@ -3,12 +3,15 @@ Library    SeleniumLibrary
 Resource    TC16_Data_lecturerLogin.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC16-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+   
 
 Run Data_LoginLecturer
     [Arguments]    ${row}
@@ -18,7 +21,8 @@ Run Data_LoginLecturer
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND   Fill Lecturer Login Form    ${row}
     ...    AND    Handle Submission Result    ${row}
     ...    AND    Validate Database For Login    ${row}    ${lecturerUsername}    ${lecturerPassword}
@@ -61,7 +65,7 @@ Handle Submission Result
         Run Keyword And Ignore Error    Click Element    //a[contains(text(),'ออกจากระบบ')]
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
-        Capture Page Screenshot    Project_Test_AcademicService/TC16_LecturerLogin/Screenshots_Data_AlertNotFound/${i}_AlertNotFound.png
+        Capture Page Screenshot    TC16_LecturerLogin/Screenshots_Data_AlertNotFound/${i}_AlertNotFound.png
         Sleep    2
         Run Keyword And Ignore Error    Click Element    css:a.back-home-link:nth-child(8)
     END
@@ -110,10 +114,10 @@ Compare Result And Write Status
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${i}    8    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC16_LecturerLogin/Screenshots_Data_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC16_LecturerLogin/Screenshots_Data_Pass/${i}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${i}    8    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC16_LecturerLogin/Screenshots_Data_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC16_LecturerLogin/Screenshots_Data_Fail/${i}_${ActualMessage}.png
     END
 
     Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

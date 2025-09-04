@@ -4,6 +4,9 @@ Resource    TC11_EditProposal.robot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${i}
     Open Excel Document    ${datatable}    TC11-EC
@@ -19,7 +22,8 @@ Run EditAddProposal
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To LoginStudent    ${i}
+    ...    Setup Speed
+    ...    AND    Go To LoginStudent    ${i}
     ...    AND    Go To AddProposal    
     ...    AND    Fill Proposal Form    ${i}
     ...    AND    Handle Submission Result    ${i}
@@ -133,7 +137,7 @@ Handle Submission Result
     ELSE
         ${ActualMessage}=    Set Variable    AlertNotFound 
         sleep    2
-        Capture Page Screenshot    Project_Test_AcademicService/TC11_EditProposal/Screenshots_AlertNotFound/${i}_AlertNotFound.png
+        Capture Page Screenshot    TC11_EditProposal/Screenshots_AlertNotFound/${i}_AlertNotFound.png
         # ✅ เพิ่มการตรวจสอบข้อความที่หน้าใหม่หรือหน้าเดิม ตรงนี้เลย
         CaptureStatusMessage    ${i}
         Go To    ${URL}
@@ -175,11 +179,11 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${i}    23    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC11_EditProposal/Screenshots_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC11_EditProposal/Screenshots_Pass/${i}_${ActualMessage}.png
         Go To    ${URL}
     ELSE
         Write Excel Cell    ${i}    23    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC11_EditProposal/Screenshots_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC11_EditProposal/Screenshots_Fail/${i}_${ActualMessage}.png
         Go To    ${URL}
     END
     

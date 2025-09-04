@@ -3,9 +3,14 @@ Library    SeleniumLibrary
 Resource    TC13_EditUploadCompleteReport.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Clear Report Data In DB
-    [Arguments]    ${student_id}
-    ${query}=    Set Variable    UPDATE report SET reportStatus = NULL WHERE studentId = '${student_id}';
+    [Arguments]    ${i}
+    ${UNStudent}=    Read Excel Cell    ${i}    2
+    ${UNStudent}=    Evaluate    '' if $UNStudent in ['None', '', None] else $UNStudent
+    ${query}=    Set Variable    UPDATE report SET reportStatus = NULL WHERE studentId = '${UNStudent}';
     Execute Sql String    ${query}
     
 Go To Academic_Services
@@ -13,7 +18,7 @@ Go To Academic_Services
     Open Excel Document    ${datatable}    TC13_EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+
 
 Run EditUploadCompleteReport
     [Arguments]    ${row}
@@ -85,7 +90,7 @@ Handle Submission Result
             Click Element   //a[contains(text(),'ออกจากระบบ')]
         ELSE
             ${ActualMessage}=    Set Variable    AlertNotFound
-            Capture Page Screenshot    Project_Test_AcademicService/TC13_EditUploadCompleteReport/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
+            Capture Page Screenshot   TC13_EditUploadCompleteReport/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
             Go To    ${URL}   
         END
 
@@ -119,10 +124,10 @@ Validate And Write Result
         ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
         IF    ${compare_result}
             Write Excel Cell    ${i}    9    PASS
-            Capture Page Screenshot    Project_Test_AcademicService/TC13_EditUploadCompleteReport/Screenshots_Pass/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC13_EditUploadCompleteReport/Screenshots_Pass/${i}_${ActualMessage}.png
         ELSE
             Write Excel Cell    ${i}    9    FAIL
-            Capture Page Screenshot    Project_Test_AcademicService/TC13_EditUploadCompleteReport/Screenshots_Fail/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC13_EditUploadCompleteReport/Screenshots_Fail/${i}_${ActualMessage}.png
         END
     
         Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

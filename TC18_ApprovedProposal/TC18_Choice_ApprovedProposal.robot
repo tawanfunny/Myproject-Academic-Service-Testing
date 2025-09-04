@@ -25,8 +25,8 @@ TC18: 18_Choice_ApprovedProposal
     [Tags]    Choice_ApprovedProposal
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        set Selenium Speed    0.4
-        Login As Lecturer
+        Setup Speed
+        Login As Lecturer    
         Go To Approved Proposal    ${i}
         Fill Comment Form    ${i}    
         Read Expected Result From Excel    ${i}     

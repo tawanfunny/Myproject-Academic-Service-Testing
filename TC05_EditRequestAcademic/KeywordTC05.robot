@@ -4,12 +4,15 @@ Resource    TC05_EditRequestAcademic.robot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC05-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+
 
 Run EditRequestAcademic
     [Arguments]    ${row}
@@ -18,7 +21,8 @@ Run EditRequestAcademic
     Log To Console    Row ${row} - Allow: ${ALLOW}
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Member
     ...    AND    Go To Edit Request Page    ${row}
     ...    AND    Fill Request Form    ${row}
@@ -100,7 +104,7 @@ Handle Submission Result
         ${ActualMessage}=    Set Variable    ${alert_result[1]}
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
-        Capture Page Screenshot    Project_Test_AcademicService/TC05_EditRequestAcademic/Screenshots_AlertNotFound/${i}_AlertNotFound.png
+        Capture Page Screenshot    TC05_EditRequestAcademic/Screenshots_AlertNotFound/${i}_AlertNotFound.png
         Sleep    2
     END
     Run Keyword And Ignore Error    Click Element    //body/form[1]/div[1]/div[1]/div[2]/a[1]
@@ -120,10 +124,10 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF   ${compare_result}
         Write Excel Cell    ${i}    10    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC05_EditRequestAcademic/Screenshots_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC05_EditRequestAcademic/Screenshots_Pass/${i}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${i}    10    FAIL 
-        Capture Page Screenshot    Project_Test_AcademicService/TC05_EditRequestAcademic/Screenshots_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC05_EditRequestAcademic/Screenshots_Fail/${i}_${ActualMessage}.png
     END
     Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}
 

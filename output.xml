@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1.1 (Python 3.13.0 on win32)" generated="2025-09-02T05:13:27.431674" rpa="false" schemaversion="5">
-<suite id="s1" name="TC18 ActionAlertMessage ApprovedProposal" source="C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot">
+<robot generator="Robot 7.1.1 (Python 3.13.0 on win32)" generated="2025-09-05T00:18:31.215272" rpa="false" schemaversion="5">
+<suite id="s1" name="TC18 ActionAlertMessage ApprovedProposal" source="c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot">
 <kw name="Connect To Database" owner="DatabaseLibrary" type="SETUP">
-<msg time="2025-09-02T05:13:28.145877" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
-<msg time="2025-09-02T05:13:28.146006" level="INFO">Configuration file doesn't exist</msg>
-<msg time="2025-09-02T05:13:28.167476" level="INFO">Connect to DB using : pymysql.connect(db='db_academic_services', user='root', passwd=***, host='127.0.0.1', port=3307, charset='utf8mb4')</msg>
+<msg time="2025-09-05T00:18:32.963649" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2025-09-05T00:18:32.965471" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2025-09-05T00:18:33.013652" level="INFO">Connect to DB using : pymysql.connect(db='db_academic_services', user='root', passwd=***, host='127.0.0.1', port=3307, charset='utf8mb4')</msg>
 <arg>${DB_TYPE}</arg>
 <arg>${DB_NAME}</arg>
 <arg>${DB_USER}</arg>
@@ -14,182 +14,185 @@
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="PASS" start="2025-09-02T05:13:28.145469" elapsed="0.028878"/>
+<status status="PASS" start="2025-09-05T00:18:32.961819" elapsed="0.100662"/>
 </kw>
 <test id="s1-t1" name="TC18: 18_ActionAlertMessage_ApprovedProposal" line="33">
 <kw name="Set Selenium Speed" owner="SeleniumLibrary" type="SETUP">
 <arg>2.5</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2025-09-02T05:13:28.177002" elapsed="0.000276"/>
+<status status="PASS" start="2025-09-05T00:18:33.065527" elapsed="0.001820"/>
 </kw>
 <kw name="Go To Academic_Services" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Open Excel Document" owner="ExcelLibrary">
 <arg>${datatable}</arg>
 <arg>TC18-EC</arg>
 <doc>Opens xlsx document file.</doc>
-<status status="PASS" start="2025-09-02T05:13:28.178295" elapsed="0.016891"/>
+<status status="PASS" start="2025-09-05T00:18:33.072950" elapsed="0.026227"/>
 </kw>
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:28.195839" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080/Academic_Services'.</msg>
+<msg time="2025-09-05T00:18:33.102932" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080/Academic_Services'.</msg>
 <arg>${URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-09-02T05:13:28.195527" elapsed="5.842738"/>
+<status status="PASS" start="2025-09-05T00:18:33.100165" elapsed="18.526436"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-09-02T05:13:34.041446" elapsed="2.546889"/>
-</kw>
-<kw name="Set Selenium Speed" owner="SeleniumLibrary">
-<arg>0.2</arg>
-<doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2025-09-02T05:13:36.588800" elapsed="0.000303"/>
+<status status="PASS" start="2025-09-05T00:18:51.631797" elapsed="2.792913"/>
 </kw>
 <arg>${datatable}</arg>
-<status status="PASS" start="2025-09-02T05:13:28.177668" elapsed="8.411671"/>
+<status status="PASS" start="2025-09-05T00:18:33.071826" elapsed="21.353671"/>
 </kw>
 <for flavor="IN RANGE">
 <iter>
+<kw name="Setup Speed" owner="KeywordTC18_ActionAlertMessage">
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0.2</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2025-09-05T00:18:54.439196" elapsed="0.000643"/>
+</kw>
+<status status="PASS" start="2025-09-05T00:18:54.438414" elapsed="0.001678"/>
+</kw>
 <kw name="Login As Lecturer" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:36.601791" level="INFO">Clicking element '//button[contains(text(),'เข้าสู่ระบบ')]'.</msg>
+<msg time="2025-09-05T00:18:54.464328" level="INFO">Clicking element '//button[contains(text(),'เข้าสู่ระบบ')]'.</msg>
 <arg>//button[contains(text(),'เข้าสู่ระบบ')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:36.592563" elapsed="0.523029"/>
+<status status="PASS" start="2025-09-05T00:18:54.440930" elapsed="0.975236"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:37.121843" level="INFO">Clicking element '//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]'.</msg>
+<msg time="2025-09-05T00:18:55.417211" level="INFO">Clicking element '//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]'.</msg>
 <arg>//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:37.121583" elapsed="0.705506"/>
+<status status="PASS" start="2025-09-05T00:18:55.416704" elapsed="1.035344"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:37.833134" level="INFO">Typing text 'sayan@gmaejo.mju.ac.th' into text field '//input[@id='lecname']'.</msg>
+<msg time="2025-09-05T00:18:56.453220" level="INFO">Typing text 'sayan@gmaejo.mju.ac.th' into text field '//input[@id='lecname']'.</msg>
 <arg>//input[@id='lecname']</arg>
 <arg>sayan@gmaejo.mju.ac.th</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:37.832703" elapsed="0.820439"/>
+<status status="PASS" start="2025-09-05T00:18:56.452688" elapsed="0.957973"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:38.656967" level="INFO">Typing text 'itscimju' into text field '//input[@id='lecpwd']'.</msg>
+<msg time="2025-09-05T00:18:57.414046" level="INFO">Typing text 'itscimju' into text field '//input[@id='lecpwd']'.</msg>
 <arg>//input[@id='lecpwd']</arg>
 <arg>itscimju</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:38.656538" elapsed="0.714161"/>
+<status status="PASS" start="2025-09-05T00:18:57.413389" elapsed="0.804551"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:39.392182" level="INFO">Clicking button '//body/form[1]/input[3]'.</msg>
+<msg time="2025-09-05T00:18:58.219071" level="INFO">Clicking button '//body/form[1]/input[3]'.</msg>
 <arg>//body/form[1]/input[3]</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:39.391784" elapsed="0.704501"/>
+<status status="PASS" start="2025-09-05T00:18:58.218549" elapsed="0.905478"/>
 </kw>
 <kw name="Handle Alert" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:40.108349" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<msg time="2025-09-05T00:18:59.127854" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
 <arg>ACCEPT</arg>
 <doc>Handles the current alert and returns its message.</doc>
-<status status="PASS" start="2025-09-02T05:13:40.106310" elapsed="0.617568"/>
+<status status="PASS" start="2025-09-05T00:18:59.124520" elapsed="0.626549"/>
 </kw>
-<status status="PASS" start="2025-09-02T05:13:36.591674" elapsed="4.134725"/>
+<status status="PASS" start="2025-09-05T00:18:54.440396" elapsed="5.311115"/>
 </kw>
 <kw name="Go To Approved Proposal" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:40.727493" level="INFO">Clicking element '//body/div[1]/div[1]/div[3]/a[1]'.</msg>
+<msg time="2025-09-05T00:18:59.754460" level="INFO">Clicking element '//body/div[1]/div[1]/div[3]/a[1]'.</msg>
 <arg>//body/div[1]/div[1]/div[3]/a[1]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:40.727280" elapsed="1.444758"/>
+<status status="PASS" start="2025-09-05T00:18:59.753887" elapsed="2.166602"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:42.177832" level="INFO">Clicking element '//tbody/tr[2-1]/td[9]/a[1]'.</msg>
+<msg time="2025-09-05T00:19:01.921405" level="INFO">Clicking element '//tbody/tr[2-1]/td[9]/a[1]'.</msg>
 <arg>//tbody/tr[${i}-1]/td[9]/a[1]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:42.176586" elapsed="0.947979"/>
+<status status="PASS" start="2025-09-05T00:19:01.920937" elapsed="1.418080"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:13:45.137089" level="INFO">Slept 2 seconds.</msg>
+<msg time="2025-09-05T00:19:05.347559" level="INFO">Slept 2 seconds.</msg>
 <arg>2s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:13:43.136229" elapsed="2.000959"/>
+<status status="PASS" start="2025-09-05T00:19:03.339889" elapsed="2.008235"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:40.726774" elapsed="4.414711"/>
+<status status="PASS" start="2025-09-05T00:18:59.752107" elapsed="5.596270"/>
 </kw>
 <kw name="Fill Comment Form" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:13:45.147839" level="INFO">${PreApprovalComments} = แก้ไข</msg>
+<msg time="2025-09-05T00:19:05.352565" level="INFO">${PreApprovalComments} = แก้ไข</msg>
 <var>${PreApprovalComments}</var>
 <arg>${i}</arg>
 <arg>2</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.142591" elapsed="0.005365"/>
+<status status="PASS" start="2025-09-05T00:19:05.349954" elapsed="0.002994"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-09-02T05:13:45.153913" level="INFO">${PreApprovalComments} = แก้ไข</msg>
+<msg time="2025-09-05T00:19:05.362729" level="INFO">${PreApprovalComments} = แก้ไข</msg>
 <var>${PreApprovalComments}</var>
 <arg>'' if $PreApprovalComments in ['None', '', None] else $PreApprovalComments</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.151254" elapsed="0.002723"/>
+<status status="PASS" start="2025-09-05T00:19:05.354177" elapsed="0.008832"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:45.159805" level="INFO">Typing text 'แก้ไข' into text field 'css:#commentDetail'.</msg>
+<msg time="2025-09-05T00:19:05.363833" level="INFO">Typing text 'แก้ไข' into text field 'css:#commentDetail'.</msg>
 <arg>css:#commentDetail</arg>
 <arg>${PreApprovalComments}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.159543" elapsed="0.699731"/>
+<status status="PASS" start="2025-09-05T00:19:05.363357" elapsed="0.765407"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:45.141919" elapsed="0.723357"/>
+<status status="PASS" start="2025-09-05T00:19:05.348731" elapsed="0.780445"/>
 </kw>
 <kw name="Read Expected Result From Excel" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:13:45.868144" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
+<msg time="2025-09-05T00:19:06.133782" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
 <var>${ExpectedResult}</var>
 <arg>${i}</arg>
 <arg>4</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.867264" elapsed="0.001121"/>
+<status status="PASS" start="2025-09-05T00:19:06.131209" elapsed="0.004171"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-09-02T05:13:45.871187" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
+<msg time="2025-09-05T00:19:06.141362" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
 <arg>${ExpectedResult}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.870895" elapsed="0.000354"/>
+<status status="PASS" start="2025-09-05T00:19:06.136666" elapsed="0.005622"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Expected Result: ${ExpectedResult}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.874647" elapsed="0.000459"/>
+<status status="PASS" start="2025-09-05T00:19:06.143524" elapsed="0.001913"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:45.866269" elapsed="0.009225"/>
+<status status="PASS" start="2025-09-05T00:19:06.129573" elapsed="0.016199"/>
 </kw>
 <kw name="Click Approved Button And Capture Alert" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:13:45.876434" level="INFO">${Action} = กดปุ่มอนุมัติแต่มีแก้ไข</msg>
+<msg time="2025-09-05T00:19:06.151228" level="INFO">${Action} = กดปุ่มอนุมัติแต่มีแก้ไข</msg>
 <var>${Action}</var>
 <arg>${i}</arg>
 <arg>3</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.876220" elapsed="0.000247"/>
+<status status="PASS" start="2025-09-05T00:19:06.148746" elapsed="0.004015"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:45.880306" level="INFO">Clicking element '//button[contains(text(),'อนุมัติแต่มีแก้ไข')]'.</msg>
+<msg time="2025-09-05T00:19:06.157860" level="INFO">Clicking element '//button[contains(text(),'อนุมัติแต่มีแก้ไข')]'.</msg>
 <arg>//button[contains(text(),'อนุมัติแต่มีแก้ไข')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.880131" elapsed="1.093607"/>
+<status status="PASS" start="2025-09-05T00:19:06.156012" elapsed="1.759510"/>
 </kw>
 <arg>Click Element</arg>
 <arg>//button[contains(text(),'อนุมัติแต่มีแก้ไข')]</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.879905" elapsed="1.103645"/>
+<status status="PASS" start="2025-09-05T00:19:06.155313" elapsed="1.761285"/>
 </kw>
 <arg>'${Action}' == 'กดปุ่มอนุมัติแต่มีแก้ไข'</arg>
 <arg>Run Keyword And Ignore Error</arg>
 <arg>Click Element</arg>
 <arg>//button[contains(text(),'อนุมัติแต่มีแก้ไข')]</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:45.879397" elapsed="1.104423"/>
+<status status="PASS" start="2025-09-05T00:19:06.153505" elapsed="1.763375"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>'${Action}' == 'กดปุ่มอนุมัติ'</arg>
@@ -197,31 +200,31 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>Click Element</arg>
 <arg>//button [@class='approve-button']</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:46.984216" elapsed="0.000593"/>
+<status status="PASS" start="2025-09-05T00:19:07.917669" elapsed="0.000867"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:13:47.986389" level="INFO">Slept 1 second.</msg>
+<msg time="2025-09-05T00:19:08.919836" level="INFO">Slept 1 second.</msg>
 <arg>1s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:13:46.985372" elapsed="1.001290"/>
+<status status="PASS" start="2025-09-05T00:19:07.918921" elapsed="1.001287"/>
 </kw>
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Handle Alert" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:47.992258" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
-<msg time="2025-09-02T05:13:53.441594" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2323.png"&gt;&lt;img src="selenium-screenshot-2323.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-09-02T05:13:53.441809" level="FAIL">Alert not found in 5 seconds.</msg>
+<msg time="2025-09-05T00:19:08.921268" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<msg time="2025-09-05T00:19:14.372608" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-14.png"&gt;&lt;img src="selenium-screenshot-14.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-09-05T00:19:14.378680" level="FAIL">Alert not found in 5 seconds.</msg>
 <arg>ACCEPT</arg>
 <doc>Handles the current alert and returns its message.</doc>
-<status status="FAIL" start="2025-09-02T05:13:47.991938" elapsed="5.466829">Alert not found in 5 seconds.</status>
+<status status="FAIL" start="2025-09-05T00:19:08.920953" elapsed="5.490674">Alert not found in 5 seconds.</status>
 </kw>
-<msg time="2025-09-02T05:13:53.460674" level="INFO">${status} = FAIL</msg>
-<msg time="2025-09-02T05:13:53.460738" level="INFO">${message} = Alert not found in 5 seconds.</msg>
+<msg time="2025-09-05T00:19:14.412414" level="INFO">${status} = FAIL</msg>
+<msg time="2025-09-05T00:19:14.412638" level="INFO">${message} = Alert not found in 5 seconds.</msg>
 <var>${status}</var>
 <var>${message}</var>
 <arg>Handle Alert</arg>
 <arg>ACCEPT</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-09-02T05:13:47.991307" elapsed="5.469463"/>
+<status status="PASS" start="2025-09-05T00:19:08.920551" elapsed="5.492213"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>'${status}' == 'PASS'</arg>
@@ -229,55 +232,55 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>${ActualMessage}</arg>
 <arg>${message}</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.462552" elapsed="0.000394"/>
+<status status="PASS" start="2025-09-05T00:19:14.413274" elapsed="0.000645"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-09-02T05:13:53.464823" level="INFO">${ActualMessage} = Alert Not Found</msg>
+<msg time="2025-09-05T00:19:14.418858" level="INFO">${ActualMessage} = Alert Not Found</msg>
 <arg>${ActualMessage}</arg>
 <arg>Alert Not Found</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.463709" elapsed="0.001191"/>
+<status status="PASS" start="2025-09-05T00:19:14.414880" elapsed="0.004600"/>
 </kw>
 <arg>'${status}' != 'PASS'</arg>
 <arg>Set Suite Variable</arg>
 <arg>${ActualMessage}</arg>
 <arg>Alert Not Found</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.463306" elapsed="0.003766"/>
+<status status="PASS" start="2025-09-05T00:19:14.414314" elapsed="0.005419"/>
 </kw>
 <kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:53.829118" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/2_ActionAlert.png"&gt;&lt;img src="Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/2_ActionAlert.png" width="800px"&gt;&lt;/a&gt;</msg>
-<arg>Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png</arg>
+<msg time="2025-09-05T00:19:14.859688" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="TC18_ApprovedProposal/Screenshots_ActionAlertMessage/2_ActionAlert.png"&gt;&lt;img src="TC18_ApprovedProposal/Screenshots_ActionAlertMessage/2_ActionAlert.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png</arg>
 <doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.467364" elapsed="0.361980"/>
+<status status="PASS" start="2025-09-05T00:19:14.420358" elapsed="0.440399"/>
 </kw>
 <kw name="Write Excel Cell" owner="ExcelLibrary">
 <arg>${i}</arg>
 <arg>6</arg>
 <arg>${ActualMessage}</arg>
 <doc>Writes value to the cell.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.831865" elapsed="0.000666"/>
+<status status="PASS" start="2025-09-05T00:19:14.862745" elapsed="0.001693"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:45.875882" elapsed="7.956961"/>
+<status status="PASS" start="2025-09-05T00:19:06.146274" elapsed="8.718457"/>
 </kw>
 <kw name="Compare And Write Result To Excel" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-09-02T05:13:53.835313" level="FAIL">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
+<msg time="2025-09-05T00:19:14.886502" level="FAIL">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</msg>
 <arg>${ActualMessage}</arg>
 <arg>${ExpectedResult}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-09-02T05:13:53.834864" elapsed="0.000579">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</status>
+<status status="FAIL" start="2025-09-05T00:19:14.883960" elapsed="0.003685">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการนี้ แต่มีแก้ไขโครงการ</status>
 </kw>
-<msg time="2025-09-02T05:13:53.837499" level="INFO">${is_pass} = False</msg>
+<msg time="2025-09-05T00:19:14.888368" level="INFO">${is_pass} = False</msg>
 <var>${is_pass}</var>
 <arg>Should Be Equal</arg>
 <arg>${ActualMessage}</arg>
 <arg>${ExpectedResult}</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.834332" elapsed="0.003311"/>
+<status status="PASS" start="2025-09-05T00:19:14.877906" elapsed="0.010835"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>${is_pass}</arg>
@@ -286,7 +289,7 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Pass</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.840215" elapsed="0.000301"/>
+<status status="PASS" start="2025-09-05T00:19:14.889775" elapsed="0.000462"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Write Excel Cell" owner="ExcelLibrary">
@@ -294,7 +297,7 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Fail</arg>
 <doc>Writes value to the cell.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.842283" elapsed="0.000339"/>
+<status status="PASS" start="2025-09-05T00:19:14.895268" elapsed="0.001914"/>
 </kw>
 <arg>not ${is_pass}</arg>
 <arg>Write Excel Cell</arg>
@@ -302,150 +305,158 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Fail</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.841828" elapsed="0.001057"/>
+<status status="PASS" start="2025-09-05T00:19:14.893612" elapsed="0.004474"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:53.833287" elapsed="0.009827"/>
+<status status="PASS" start="2025-09-05T00:19:14.874751" elapsed="0.025674"/>
 </kw>
 <kw name="Go To Logout" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:53.844098" level="INFO">Clicking element '//a[contains(text(),'ออกจากระบบ')]'.</msg>
+<msg time="2025-09-05T00:19:14.911237" level="INFO">Clicking element '//a[contains(text(),'ออกจากระบบ')]'.</msg>
 <arg>//a[contains(text(),'ออกจากระบบ')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:53.843820" elapsed="1.222132"/>
+<status status="PASS" start="2025-09-05T00:19:14.907481" elapsed="1.571310"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:13:56.079277" level="INFO">Slept 1 second.</msg>
+<msg time="2025-09-05T00:19:17.480229" level="INFO">Slept 1 second.</msg>
 <arg>1s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:13:55.078417" elapsed="1.001069"/>
+<status status="PASS" start="2025-09-05T00:19:16.479345" elapsed="1.001433"/>
 </kw>
-<status status="PASS" start="2025-09-02T05:13:53.843435" elapsed="2.244008"/>
+<status status="PASS" start="2025-09-05T00:19:14.902285" elapsed="2.580258"/>
 </kw>
 <var name="${i}">2</var>
-<status status="PASS" start="2025-09-02T05:13:36.591052" elapsed="19.496710"/>
+<status status="PASS" start="2025-09-05T00:18:54.437670" elapsed="23.045140"/>
 </iter>
 <iter>
+<kw name="Setup Speed" owner="KeywordTC18_ActionAlertMessage">
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0.2</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2025-09-05T00:19:17.484509" elapsed="0.000481"/>
+</kw>
+<status status="PASS" start="2025-09-05T00:19:17.484024" elapsed="0.004052"/>
+</kw>
 <kw name="Login As Lecturer" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:56.089174" level="INFO">Clicking element '//button[contains(text(),'เข้าสู่ระบบ')]'.</msg>
+<msg time="2025-09-05T00:19:17.490321" level="INFO">Clicking element '//button[contains(text(),'เข้าสู่ระบบ')]'.</msg>
 <arg>//button[contains(text(),'เข้าสู่ระบบ')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:56.088931" elapsed="0.469112"/>
+<status status="PASS" start="2025-09-05T00:19:17.489823" elapsed="0.487571"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:56.561452" level="INFO">Clicking element '//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]'.</msg>
+<msg time="2025-09-05T00:19:17.978291" level="INFO">Clicking element '//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]'.</msg>
 <arg>//a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:56.561180" elapsed="0.505376"/>
+<status status="PASS" start="2025-09-05T00:19:17.977825" elapsed="0.569788"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:57.074976" level="INFO">Typing text 'sayan@gmaejo.mju.ac.th' into text field '//input[@id='lecname']'.</msg>
+<msg time="2025-09-05T00:19:18.549059" level="INFO">Typing text 'sayan@gmaejo.mju.ac.th' into text field '//input[@id='lecname']'.</msg>
 <arg>//input[@id='lecname']</arg>
 <arg>sayan@gmaejo.mju.ac.th</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:57.073394" elapsed="0.778835"/>
+<status status="PASS" start="2025-09-05T00:19:18.548296" elapsed="0.880257"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:57.861368" level="INFO">Typing text 'itscimju' into text field '//input[@id='lecpwd']'.</msg>
+<msg time="2025-09-05T00:19:19.429756" level="INFO">Typing text 'itscimju' into text field '//input[@id='lecpwd']'.</msg>
 <arg>//input[@id='lecpwd']</arg>
 <arg>itscimju</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:57.860723" elapsed="0.736268"/>
+<status status="PASS" start="2025-09-05T00:19:19.429165" elapsed="0.763755"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:58.601922" level="INFO">Clicking button '//body/form[1]/input[3]'.</msg>
+<msg time="2025-09-05T00:19:20.193913" level="INFO">Clicking button '//body/form[1]/input[3]'.</msg>
 <arg>//body/form[1]/input[3]</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:58.601535" elapsed="0.728823"/>
+<status status="PASS" start="2025-09-05T00:19:20.193439" elapsed="0.740478"/>
 </kw>
 <kw name="Handle Alert" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:59.346573" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<msg time="2025-09-05T00:19:20.938654" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
 <arg>ACCEPT</arg>
 <doc>Handles the current alert and returns its message.</doc>
-<status status="PASS" start="2025-09-02T05:13:59.346246" elapsed="0.622230"/>
+<status status="PASS" start="2025-09-05T00:19:20.936047" elapsed="0.660154"/>
 </kw>
-<status status="PASS" start="2025-09-02T05:13:56.088387" elapsed="3.893892"/>
+<status status="PASS" start="2025-09-05T00:19:17.489218" elapsed="4.107383"/>
 </kw>
 <kw name="Go To Approved Proposal" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:13:59.985358" level="INFO">Clicking element '//body/div[1]/div[1]/div[3]/a[1]'.</msg>
+<msg time="2025-09-05T00:19:21.620469" level="INFO">Clicking element '//body/div[1]/div[1]/div[3]/a[1]'.</msg>
 <arg>//body/div[1]/div[1]/div[3]/a[1]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:13:59.984602" elapsed="1.011259"/>
+<status status="PASS" start="2025-09-05T00:19:21.597811" elapsed="1.299078"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:00.999216" level="INFO">Clicking element '//tbody/tr[3-1]/td[9]/a[1]'.</msg>
+<msg time="2025-09-05T00:19:22.897586" level="INFO">Clicking element '//tbody/tr[3-1]/td[9]/a[1]'.</msg>
 <arg>//tbody/tr[${i}-1]/td[9]/a[1]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:14:00.998895" elapsed="0.743404"/>
+<status status="PASS" start="2025-09-05T00:19:22.897250" elapsed="0.859694"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:14:03.747449" level="INFO">Slept 2 seconds.</msg>
+<msg time="2025-09-05T00:19:25.768040" level="INFO">Slept 2 seconds.</msg>
 <arg>2s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:14:01.746534" elapsed="2.001046"/>
+<status status="PASS" start="2025-09-05T00:19:23.757789" elapsed="2.011851"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:13:59.983030" elapsed="3.767693"/>
+<status status="PASS" start="2025-09-05T00:19:21.596949" elapsed="4.177258"/>
 </kw>
 <kw name="Fill Comment Form" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:14:03.751943" level="INFO">${PreApprovalComments} = โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT </msg>
+<msg time="2025-09-05T00:19:25.777458" level="INFO">${PreApprovalComments} = โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT </msg>
 <var>${PreApprovalComments}</var>
 <arg>${i}</arg>
 <arg>2</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:14:03.751645" elapsed="0.000352"/>
+<status status="PASS" start="2025-09-05T00:19:25.776617" elapsed="0.001155"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-09-02T05:14:03.755364" level="INFO">${PreApprovalComments} = โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT </msg>
+<msg time="2025-09-05T00:19:25.780242" level="INFO">${PreApprovalComments} = โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT </msg>
 <var>${PreApprovalComments}</var>
 <arg>'' if $PreApprovalComments in ['None', '', None] else $PreApprovalComments</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-09-02T05:14:03.754627" elapsed="0.000783"/>
+<status status="PASS" start="2025-09-05T00:19:25.778542" elapsed="0.001979"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:03.758202" level="INFO">Typing text 'โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT ' into text field 'css:#commentDetail'.</msg>
+<msg time="2025-09-05T00:19:25.781328" level="INFO">Typing text 'โครงงานนี้มีแนวคิดที่ดีและมีประโยชน์ในการพัฒนาทักษะด้าน IT ' into text field 'css:#commentDetail'.</msg>
 <arg>css:#commentDetail</arg>
 <arg>${PreApprovalComments}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:14:03.757962" elapsed="0.798678"/>
+<status status="PASS" start="2025-09-05T00:19:25.780874" elapsed="1.265744"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:14:03.751161" elapsed="0.807970"/>
+<status status="PASS" start="2025-09-05T00:19:25.775245" elapsed="1.272080"/>
 </kw>
 <kw name="Read Expected Result From Excel" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:14:04.561487" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
+<msg time="2025-09-05T00:19:27.053250" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
 <var>${ExpectedResult}</var>
 <arg>${i}</arg>
 <arg>4</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.561110" elapsed="0.000431"/>
+<status status="PASS" start="2025-09-05T00:19:27.052604" elapsed="0.000900"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-09-02T05:14:04.564399" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
+<msg time="2025-09-05T00:19:27.055416" level="INFO">${ExpectedResult} = คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
 <arg>${ExpectedResult}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.563997" elapsed="0.000490"/>
+<status status="PASS" start="2025-09-05T00:19:27.054728" elapsed="0.001715"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Expected Result: ${ExpectedResult}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.567069" elapsed="0.001535"/>
+<status status="PASS" start="2025-09-05T00:19:27.057061" elapsed="0.006184"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:14:04.560346" elapsed="0.008710"/>
+<status status="PASS" start="2025-09-05T00:19:27.048081" elapsed="0.019474"/>
 </kw>
 <kw name="Click Approved Button And Capture Alert" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Read Excel Cell" owner="ExcelLibrary">
-<msg time="2025-09-02T05:14:04.570210" level="INFO">${Action} = กดปุ่มอนุมัติ</msg>
+<msg time="2025-09-05T00:19:27.073762" level="INFO">${Action} = กดปุ่มอนุมัติ</msg>
 <var>${Action}</var>
 <arg>${i}</arg>
 <arg>3</arg>
 <doc>Returns content of a cell.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.569931" elapsed="0.000323"/>
+<status status="PASS" start="2025-09-05T00:19:27.071921" elapsed="0.002199"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>'${Action}' == 'กดปุ่มอนุมัติแต่มีแก้ไข'</arg>
@@ -453,51 +464,51 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>Click Element</arg>
 <arg>//button[contains(text(),'อนุมัติแต่มีแก้ไข')]</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.573023" elapsed="0.000369"/>
+<status status="PASS" start="2025-09-05T00:19:27.074844" elapsed="0.002268"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:04.575815" level="INFO">Clicking element '//button [@class='approve-button']'.</msg>
+<msg time="2025-09-05T00:19:27.090150" level="INFO">Clicking element '//button [@class='approve-button']'.</msg>
 <arg>//button [@class='approve-button']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.575427" elapsed="0.987846"/>
+<status status="PASS" start="2025-09-05T00:19:27.082298" elapsed="0.639052"/>
 </kw>
 <arg>Click Element</arg>
 <arg>//button [@class='approve-button']</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.574082" elapsed="0.999920"/>
+<status status="PASS" start="2025-09-05T00:19:27.081780" elapsed="0.641005"/>
 </kw>
 <arg>'${Action}' == 'กดปุ่มอนุมัติ'</arg>
 <arg>Run Keyword And Ignore Error</arg>
 <arg>Click Element</arg>
 <arg>//button [@class='approve-button']</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:04.573759" elapsed="1.000585"/>
+<status status="PASS" start="2025-09-05T00:19:27.077867" elapsed="0.645177"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:14:06.576315" level="INFO">Slept 1 second.</msg>
+<msg time="2025-09-05T00:19:28.726801" level="INFO">Slept 1 second.</msg>
 <arg>1s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:14:05.575662" elapsed="1.000829"/>
+<status status="PASS" start="2025-09-05T00:19:27.723426" elapsed="1.004422"/>
 </kw>
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Handle Alert" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:06.580877" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
-<msg time="2025-09-02T05:14:12.009908" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2324.png"&gt;&lt;img src="selenium-screenshot-2324.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-09-02T05:14:12.010259" level="FAIL">Alert not found in 5 seconds.</msg>
+<msg time="2025-09-05T00:19:28.729209" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<msg time="2025-09-05T00:19:34.194205" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-15.png"&gt;&lt;img src="selenium-screenshot-15.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-09-05T00:19:34.194620" level="FAIL">Alert not found in 5 seconds.</msg>
 <arg>ACCEPT</arg>
 <doc>Handles the current alert and returns its message.</doc>
-<status status="FAIL" start="2025-09-02T05:14:06.580682" elapsed="5.431900">Alert not found in 5 seconds.</status>
+<status status="FAIL" start="2025-09-05T00:19:28.728863" elapsed="5.473638">Alert not found in 5 seconds.</status>
 </kw>
-<msg time="2025-09-02T05:14:12.022261" level="INFO">${status} = FAIL</msg>
-<msg time="2025-09-02T05:14:12.022353" level="INFO">${message} = Alert not found in 5 seconds.</msg>
+<msg time="2025-09-05T00:19:34.203841" level="INFO">${status} = FAIL</msg>
+<msg time="2025-09-05T00:19:34.204284" level="INFO">${message} = Alert not found in 5 seconds.</msg>
 <var>${status}</var>
 <var>${message}</var>
 <arg>Handle Alert</arg>
 <arg>ACCEPT</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2025-09-02T05:14:06.580224" elapsed="5.442169"/>
+<status status="PASS" start="2025-09-05T00:19:28.728384" elapsed="5.476024"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>'${status}' == 'PASS'</arg>
@@ -505,55 +516,55 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>${ActualMessage}</arg>
 <arg>${message}</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.024806" elapsed="0.000315"/>
+<status status="PASS" start="2025-09-05T00:19:34.205577" elapsed="0.001357"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2025-09-02T05:14:12.025718" level="INFO">${ActualMessage} = Alert Not Found</msg>
+<msg time="2025-09-05T00:19:34.207780" level="INFO">${ActualMessage} = Alert Not Found</msg>
 <arg>${ActualMessage}</arg>
 <arg>Alert Not Found</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.025555" elapsed="0.000210"/>
+<status status="PASS" start="2025-09-05T00:19:34.207512" elapsed="0.000521"/>
 </kw>
 <arg>'${status}' != 'PASS'</arg>
 <arg>Set Suite Variable</arg>
 <arg>${ActualMessage}</arg>
 <arg>Alert Not Found</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.025347" elapsed="0.003278"/>
+<status status="PASS" start="2025-09-05T00:19:34.207196" elapsed="0.001049"/>
 </kw>
 <kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:12.418520" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/3_ActionAlert.png"&gt;&lt;img src="Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/3_ActionAlert.png" width="800px"&gt;&lt;/a&gt;</msg>
-<arg>Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png</arg>
+<msg time="2025-09-05T00:19:34.608922" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="TC18_ApprovedProposal/Screenshots_ActionAlertMessage/3_ActionAlert.png"&gt;&lt;img src="TC18_ApprovedProposal/Screenshots_ActionAlertMessage/3_ActionAlert.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png</arg>
 <doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.029107" elapsed="0.389623"/>
+<status status="PASS" start="2025-09-05T00:19:34.208691" elapsed="0.400616"/>
 </kw>
 <kw name="Write Excel Cell" owner="ExcelLibrary">
 <arg>${i}</arg>
 <arg>6</arg>
 <arg>${ActualMessage}</arg>
 <doc>Writes value to the cell.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.428576" elapsed="0.000395"/>
+<status status="PASS" start="2025-09-05T00:19:34.609602" elapsed="0.000584"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:14:04.569476" elapsed="7.859718"/>
+<status status="PASS" start="2025-09-05T00:19:27.071019" elapsed="7.539440"/>
 </kw>
 <kw name="Compare And Write Result To Excel" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-09-02T05:14:12.430499" level="FAIL">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
+<msg time="2025-09-05T00:19:34.613610" level="FAIL">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</msg>
 <arg>${ActualMessage}</arg>
 <arg>${ExpectedResult}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-09-02T05:14:12.430068" elapsed="0.000604">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</status>
+<status status="FAIL" start="2025-09-05T00:19:34.612328" elapsed="0.003050">Alert Not Found != คุณแน่ใจหรือไม่? ที่จะอนุมัติโครงการ</status>
 </kw>
-<msg time="2025-09-02T05:14:12.433240" level="INFO">${is_pass} = False</msg>
+<msg time="2025-09-05T00:19:34.616004" level="INFO">${is_pass} = False</msg>
 <var>${is_pass}</var>
 <arg>Should Be Equal</arg>
 <arg>${ActualMessage}</arg>
 <arg>${ExpectedResult}</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.429817" elapsed="0.003472"/>
+<status status="PASS" start="2025-09-05T00:19:34.611838" elapsed="0.004338"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>${is_pass}</arg>
@@ -562,7 +573,7 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Pass</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.434827" elapsed="0.000204"/>
+<status status="PASS" start="2025-09-05T00:19:34.616924" elapsed="0.000409"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Write Excel Cell" owner="ExcelLibrary">
@@ -570,7 +581,7 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Fail</arg>
 <doc>Writes value to the cell.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.435687" elapsed="0.000216"/>
+<status status="PASS" start="2025-09-05T00:19:34.618761" elapsed="0.000653"/>
 </kw>
 <arg>not ${is_pass}</arg>
 <arg>Write Excel Cell</arg>
@@ -578,56 +589,56 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 <arg>7</arg>
 <arg>Fail</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.435379" elapsed="0.000677"/>
+<status status="PASS" start="2025-09-05T00:19:34.617646" elapsed="0.002455"/>
 </kw>
 <arg>${i}</arg>
-<status status="PASS" start="2025-09-02T05:14:12.429450" elapsed="0.006763"/>
+<status status="PASS" start="2025-09-05T00:19:34.610889" elapsed="0.009628"/>
 </kw>
 <kw name="Go To Logout" owner="KeywordTC18_ActionAlertMessage">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-09-02T05:14:12.436801" level="INFO">Clicking element '//a[contains(text(),'ออกจากระบบ')]'.</msg>
+<msg time="2025-09-05T00:19:34.624394" level="INFO">Clicking element '//a[contains(text(),'ออกจากระบบ')]'.</msg>
 <arg>//a[contains(text(),'ออกจากระบบ')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-02T05:14:12.436646" elapsed="0.960248"/>
+<status status="PASS" start="2025-09-05T00:19:34.622078" elapsed="3.103416"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-09-02T05:14:14.402946" level="INFO">Slept 1 second.</msg>
+<msg time="2025-09-05T00:19:38.726803" level="INFO">Slept 1 second.</msg>
 <arg>1s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-09-02T05:14:13.401745" elapsed="1.001590"/>
+<status status="PASS" start="2025-09-05T00:19:37.726112" elapsed="1.001109"/>
 </kw>
-<status status="PASS" start="2025-09-02T05:14:12.436413" elapsed="1.970749"/>
+<status status="PASS" start="2025-09-05T00:19:34.621106" elapsed="4.106353"/>
 </kw>
 <var name="${i}">3</var>
-<status status="PASS" start="2025-09-02T05:13:56.088112" elapsed="18.319618"/>
+<status status="PASS" start="2025-09-05T00:19:17.483627" elapsed="21.243968"/>
 </iter>
 <var>${i}</var>
 <value>2</value>
 <value>${rows}+1</value>
-<status status="PASS" start="2025-09-02T05:13:36.590069" elapsed="37.818160"/>
+<status status="PASS" start="2025-09-05T00:18:54.430510" elapsed="44.297283"/>
 </for>
 <kw name="Save Excel Document" owner="ExcelLibrary">
 <arg>${datatable}</arg>
 <doc>Saves the current document to disk.</doc>
-<status status="PASS" start="2025-09-02T05:14:14.409402" elapsed="0.112179"/>
+<status status="PASS" start="2025-09-05T00:19:38.736118" elapsed="0.189637"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-09-02T05:14:14.522799" elapsed="2.742731"/>
+<status status="PASS" start="2025-09-05T00:19:38.935752" elapsed="3.268487"/>
 </kw>
 <kw name="Close Current Excel Document" owner="ExcelLibrary">
 <doc>Closes current document.</doc>
-<status status="PASS" start="2025-09-02T05:14:17.266097" elapsed="0.000201"/>
+<status status="PASS" start="2025-09-05T00:19:42.205190" elapsed="0.000360"/>
 </kw>
 <doc>Test_18_ActionAlertMessage_ApprovedProposal</doc>
 <tag>ActionAlertMessage_ApprovedProposal</tag>
-<status status="PASS" start="2025-09-02T05:13:28.176223" elapsed="49.090454"/>
+<status status="PASS" start="2025-09-05T00:18:33.063072" elapsed="69.145221"/>
 </test>
 <kw name="Disconnect From Database" owner="DatabaseLibrary" type="TEARDOWN">
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2025-09-02T05:14:17.272130" elapsed="0.000452"/>
+<status status="PASS" start="2025-09-05T00:19:42.230342" elapsed="0.004787"/>
 </kw>
-<status status="PASS" start="2025-09-02T05:13:27.510261" elapsed="49.762520"/>
+<status status="PASS" start="2025-09-05T00:18:31.230215" elapsed="71.005286"/>
 </suite>
 <statistics>
 <total>
@@ -641,9 +652,9 @@ you can set any other DB module specific parameters as key/value pairs.</doc>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-09-02T05:13:28.142293" level="ERROR">Error in file 'C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 9: Setting 'Suite Setup' is not allowed in resource file.</msg>
-<msg time="2025-09-02T05:13:28.143237" level="ERROR">Error in file 'C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 11: Setting 'Suite Teardown' is not allowed in resource file.</msg>
-<msg time="2025-09-02T05:13:28.143416" level="ERROR">Error in file 'C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 12: Setting 'Task Setup' is not allowed in resource file.</msg>
-<msg time="2025-09-02T05:13:28.143614" level="ERROR">Error in file 'C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\KeywordTC18_ActionAlertMessage.robot' on line 3: Error in file 'C:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 32: Resource file with 'Test Cases' section is invalid.</msg>
+<msg time="2025-09-05T00:18:32.947838" level="ERROR">Error in file 'c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 9: Setting 'Suite Setup' is not allowed in resource file.</msg>
+<msg time="2025-09-05T00:18:32.950515" level="ERROR">Error in file 'c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 11: Setting 'Suite Teardown' is not allowed in resource file.</msg>
+<msg time="2025-09-05T00:18:32.955412" level="ERROR">Error in file 'c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 12: Setting 'Task Setup' is not allowed in resource file.</msg>
+<msg time="2025-09-05T00:18:32.956699" level="ERROR">Error in file 'c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\KeywordTC18_ActionAlertMessage.robot' on line 3: Error in file 'c:\test2\it\Project_Test_AcademicService\TC18_ApprovedProposal\TC18_ActionAlertMessage_ApprovedProposal.robot' on line 32: Resource file with 'Test Cases' section is invalid.</msg>
 </errors>
 </robot>

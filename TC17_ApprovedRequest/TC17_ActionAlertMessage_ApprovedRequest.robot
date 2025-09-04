@@ -21,9 +21,11 @@ ${cols}    8
 TC17: 17_ActionAlertMessage_ApprovedRequest
     [Documentation]    Test_17_ActionAlertMessage_ApprovedRequest
     [Tags]    ActionAlertMessage_ApprovedRequest
-    Set Selenium Speed    5
+    
     Go To Academic_Services    ${datatable}
+
     FOR    ${i}    IN RANGE    2    ${rows}+1
+        Setup Speed
         Login As Lecturer
         Go To Approved Request
         Fill Comment Form    ${i}    

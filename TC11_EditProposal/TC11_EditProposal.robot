@@ -18,7 +18,6 @@ ${cols}    25
 TC11: 11_Data_EditAddProposal
     [Documentation]    Test_11_Data_EditAddProposal
     [Tags]    Data_EditAddProposal
-    Set Selenium Speed    2.5
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1

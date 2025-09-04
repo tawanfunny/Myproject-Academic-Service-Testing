@@ -4,13 +4,15 @@ Resource    TC18_ActionAlertMessage_ApprovedProposal.robot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
      
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC18-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.2
+   
 
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -47,7 +49,7 @@ Click Approved Button And Capture Alert
     ${status}    ${message}=    Run Keyword And Ignore Error    Handle Alert    ACCEPT
     Run Keyword If    '${status}' == 'PASS'    Set Suite Variable    ${ActualMessage}    ${message}
     Run Keyword If    '${status}' != 'PASS'    Set Suite Variable    ${ActualMessage}    Alert Not Found
-    Capture Page Screenshot    Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png
+    Capture Page Screenshot    TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png
     
     Write Excel Cell    ${i}    6    ${ActualMessage}
 

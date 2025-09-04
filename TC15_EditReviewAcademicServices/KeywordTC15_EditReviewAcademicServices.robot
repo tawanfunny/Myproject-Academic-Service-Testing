@@ -3,9 +3,14 @@ Library    SeleniumLibrary
 Resource    TC15_EditReviewAcademicServices.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Clear Review Data In DB
-    [Arguments]    ${student_id}
-    ${query}=    Set Variable    UPDATE review SET activityImg = NULL WHERE studentId = '${student_id}';
+    [Arguments]    ${i}
+    ${UNStudent}=    Read Excel Cell    ${i}    2
+    ${UNStudent}=    Evaluate    '' if $UNStudent in ['None', '', None] else $UNStudent
+    ${query}=    Set Variable    UPDATE review SET activityImg = NULL WHERE studentId = '${UNStudent}';
     Execute Sql String    ${query}
 
 Go To Academic_Services
@@ -23,7 +28,8 @@ Run EditReviewAcademicServices
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Student    ${row}
     ...    AND    Go To Review Page
     ...    AND    Upload Image And Review    ${row}
@@ -87,7 +93,7 @@ Handle Submission Result
         ELSE
             ${ActualMessage}=    Set Variable    AlertNotFound
             Sleep    2
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
             Go To    ${URL} 
         END
 
@@ -152,10 +158,10 @@ Validate And Write Result
         ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
         IF    ${compare_result}
             Write Excel Cell    ${i}    10    PASS
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_Pass/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_Pass/${i}_${ActualMessage}.png
         ELSE
             Write Excel Cell    ${i}    10    FAIL
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_Fail/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_Fail/${i}_${ActualMessage}.png
         END
     
         Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

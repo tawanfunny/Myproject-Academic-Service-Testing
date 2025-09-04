@@ -20,7 +20,6 @@ ${cols}    13
 TC03: 03_Data_RequestService
     [Documentation]    Test_03_Data_RequestService
     [Tags]    Request_Service
-    Set Selenium Speed    1
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1

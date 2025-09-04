@@ -3,6 +3,9 @@ Library    SeleniumLibrary
 Resource    TC09_ActionAlertMessage_SelectRequest.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Clear Select Data In DB
     [Arguments]    ${i}
     ${student_id}=    Read Excel Cell    ${i}    2
@@ -14,7 +17,7 @@ Go To Academic_Services
     [Arguments]    ${row}
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+
 
 Login As Student
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -38,7 +41,7 @@ Click Select Button And Capture Alert
     Run Keyword If    '${status}' == 'PASS'    Set Suite Variable    ${ActualMessage}    ${message}
     Run Keyword If    '${status}' != 'PASS'    Set Suite Variable    ${ActualMessage}    Alert Not Found
     Execute Javascript    window.scrollTo(0, 300);
-    Capture Page Screenshot    Project_Test_AcademicService/TC09_SelectRequest/Screenshots_ActionAlert/${i}_ActionAlert.png
+    Capture Page Screenshot    TC09_SelectRequest/Screenshots_ActionAlert/${i}_ActionAlert.png
     
     Write Excel Cell    ${i}    5    ${ActualMessage}
 

@@ -3,18 +3,9 @@ Library    SeleniumLibrary
 Resource    TC12_UploadCompleteReport.robot
 
 *** Keywords ***
-# --- Database Setup / Mock ---
-# Prepare Report Always True In DB
-#     [Arguments]    ${student_id}
-#     ${query}=    Set Variable    CALL PrepareReportAlwaysTrue('${student_id}');
-#     Log To Console    Preparing ALWAYS TRUE report for student: ${student_id}
-#     Execute Sql String    ${query}
+Setup Speed
+    Set Selenium Speed    0.2
 
-# Prepare Report Mock Data In DB
-#     [Arguments]    ${student_id}
-#     ${query}=    Set Variable    CALL PrepareReportMockData('${student_id}');
-#     Log To Console    Preparing MOCK report data for student: ${student_id}
-#     Execute Sql String    ${query}
 Clear Report Data In DB
     [Arguments]    ${i}
     ${UNStudent}=    Read Excel Cell    ${i}    2
@@ -22,17 +13,6 @@ Clear Report Data In DB
     Log To Console    Trying to delete proposal with studentId: ${UNStudent}
     ${query}=    Set Variable    DELETE FROM `db_academic_services`.`report` WHERE studentId = '${UNStudent}';
     Execute Sql String    ${query}
-
-# Clear Report Data In DB
-#     [Arguments]    ${student_id}
-#     ${query}=    Set Variable    UPDATE report SET reportStatus = NULL WHERE studentId = '${student_id}';
-#     Execute Sql String    ${query}
-   
-# Clear Report Mock Data In DB
-#     [Arguments]    ${student_id}
-#     ${query}=    Set Variable    CALL ClearReportMockData('${student_id}');
-#     Log To Console    Clearing MOCK report data for student: ${student_id}
-#     Execute Sql String    ${query}
 
 
 
@@ -42,7 +22,6 @@ Go To Academic_Services
     Open Excel Document    ${datatable}    TC12_EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
 
 Run UploadCompleteReport
     [Arguments]    ${row}
@@ -52,7 +31,8 @@ Run UploadCompleteReport
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Student    ${row}
     ...    AND    Go To Upload Complete Report Page
     ...    AND    Upload Complete Report    ${row}
@@ -115,7 +95,7 @@ Handle Submission Result
             Click Element   //a[contains(text(),'ออกจากระบบ')]
         ELSE
             ${ActualMessage}=    Set Variable    AlertNotFound
-            Capture Page Screenshot    Project_Test_AcademicService/TC12_UploadCompleteReport/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC12_UploadCompleteReport/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
             Go To    ${URL}   
         END
 
@@ -150,10 +130,10 @@ Validate And Write Result
         ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
         IF   ${compare_result}
             Write Excel Cell    ${i}    9    PASS
-            Capture Page Screenshot    Project_Test_AcademicService/TC12_UploadCompleteReport/Screenshots_Pass/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC12_UploadCompleteReport/Screenshots_Pass/${i}_${ActualMessage}.png
         ELSE
             Write Excel Cell    ${i}    9    FAIL
-            Capture Page Screenshot    Project_Test_AcademicService/TC12_UploadCompleteReport/Screenshots_Fail/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC12_UploadCompleteReport/Screenshots_Fail/${i}_${ActualMessage}.png
         END
     
         Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

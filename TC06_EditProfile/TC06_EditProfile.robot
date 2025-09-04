@@ -21,7 +21,6 @@ ${cols}    16
 TC06: 06_Data_RegisterSchool
     [Documentation]    Test_06_Data_EditProfile
     [Tags]    Edit_Profile
-    Set Selenium Speed    1
     Go To Academic_Services    ${datatable}
     Go To Login Page
     Login As Member

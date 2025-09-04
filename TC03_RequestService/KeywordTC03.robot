@@ -4,6 +4,9 @@ Resource    TC03_RequestService.robot
 
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC03-EC
@@ -18,7 +21,8 @@ Run Request_Service
     Log To Console    Row ${row} - Allow: ${ALLOW}
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Member
     ...    AND    Fill Request Form    ${row}
     ...    AND    Fill Start Date    ${row}
@@ -94,7 +98,7 @@ Handle Submission Result
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
         Sleep    2
-        Capture Page Screenshot    Project_Test_AcademicService/TC03_RequestService/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC03_RequestService/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
     END
     Run Keyword And Ignore Error    Click Element    //body/form[1]/div[1]/div[1]/div[2]/a[1]
     Set Test Variable    ${ActualMessage}
@@ -114,10 +118,10 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${i}    10    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC03_RequestService/Screenshots_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC03_RequestService/Screenshots_Pass/${i}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${i}    10    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC03_RequestService/Screenshots_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC03_RequestService/Screenshots_Fail/${i}_${ActualMessage}.png
     END
     
     Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

@@ -3,6 +3,9 @@ Library    SeleniumLibrary
 Resource    TC14_ReviewAcademicServices.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
+
 Clear Review Data In DB
     [Arguments]    ${i}
     ${UNStudent}=    Read Excel Cell    ${i}    2
@@ -18,7 +21,7 @@ Go To Academic_Services
     Open Excel Document    ${datatable}    TC14-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-    Set Selenium Speed    0.1
+
 
 Run ReviewAcademicServices
     [Arguments]    ${row}
@@ -28,7 +31,8 @@ Run ReviewAcademicServices
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Student    ${row}
     ...    AND    Go To Review Page
     ...    AND    Upload Image And Review    ${row}
@@ -92,7 +96,7 @@ Handle Submission Result
         ELSE
             ${ActualMessage}=    Set Variable    AlertNotFound
             Sleep    2
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_AlertNotFound/${i}_${ActualMessage}.png
             Go To    ${URL} 
         END
 
@@ -126,21 +130,6 @@ Check Uploaded Image Extension In DB
         ...    ELSE
         ...    Run Keyword    
         ...    Check Image Extension Valid    ${img_url}    ${i}
-
-        # # แบ่ง string โดยใช้จุด (.) เพื่อเอานามสกุล
-        # ${parts}=    Split String    ${img_url}    .
-        # ${img_ext}=    Set Variable    ${parts}[-1]
-        # ${img_ext}=    Convert To Lower Case    ${img_ext}
-
-        # Log To Console    Image extension from DB: ${img_ext}
-
-        # ${is_valid}=    Evaluate    '${img_ext}' in ['jpg','jpeg','png']
-
-        # IF    ${is_valid}
-        #     Write Excel Cell    ${i}    9    TRUE
-        # ELSE
-        #     Write Excel Cell    ${i}    9    FALSE
-        # END
     ELSE
         Write Excel Cell    ${i}    9    NOT FOUND
     END
@@ -171,10 +160,10 @@ Validate And Write Result
         ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
         IF    ${compare_result}
             Write Excel Cell    ${i}    10    PASS
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_Pass/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_Pass/${i}_${ActualMessage}.png
         ELSE
             Write Excel Cell    ${i}    10    FAIL
-            Capture Page Screenshot    Project_Test_AcademicService/TC14_ReviewAcademicServices/Screenshots_Fail/${i}_${ActualMessage}.png
+            Capture Page Screenshot    TC14_ReviewAcademicServices/Screenshots_Fail/${i}_${ActualMessage}.png
         END
     
         Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

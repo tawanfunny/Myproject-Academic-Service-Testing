@@ -3,6 +3,8 @@ Library    SeleniumLibrary
 Resource    TC07_RegisterStudent.robot
 
 *** Keywords ***
+Setup Speed
+    Set Selenium Speed    0.2
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC07-EC
@@ -18,7 +20,8 @@ Run Register_Student
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To RegisterStudent
+    ...    Setup Speed
+    ...    AND    Go To RegisterStudent
     ...    AND    Fill Student Registration Form    ${i}
     ...    AND    Handle Submission Result    ${i}
     ...    AND    Validate And Write Result    ${i}
@@ -85,7 +88,7 @@ Handle Submission Result
     ELSE
         ${ActualMessage}=    Set Variable    Alert not found
         Sleep    2
-        Capture Page Screenshot    Project_Test_AcademicService/TC07_RegisterStudent/Screenshots_AlertNotFound/${i}_AlertNotFound.png
+        Capture Page Screenshot   TC07_RegisterStudent/Screenshots_AlertNotFound/${i}_AlertNotFound.png
         Run Keyword And Ignore Error    Mouse Over    //body/div[1]/a[1]
         Run Keyword And Ignore Error    Click Element    //body/div[1]/a[1]
     END
@@ -107,10 +110,10 @@ Validate And Write Result
     ${compare_result}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     IF    ${compare_result}
         Write Excel Cell    ${i}    11    PASS
-        Capture Page Screenshot    Project_Test_AcademicService/TC07_RegisterStudent/Screenshots_Pass/${i}_${ActualMessage}.png
+        Capture Page Screenshot    TC07_RegisterStudent/Screenshots_Pass/${i}_${ActualMessage}.png
     ELSE
         Write Excel Cell    ${i}    11    FAIL
-        Capture Page Screenshot    Project_Test_AcademicService/TC07_RegisterStudent/Screenshots_Fail/${i}_${ActualMessage}.png
+        Capture Page Screenshot   TC07_RegisterStudent/Screenshots_Fail/${i}_${ActualMessage}.png
     END
 
     Run Keyword    Write Suggestion Based On Comparison    ${i}    ${ExpectedResult}    ${ActualMessage}

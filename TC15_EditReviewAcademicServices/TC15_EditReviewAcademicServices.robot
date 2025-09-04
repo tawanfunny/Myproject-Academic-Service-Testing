@@ -18,7 +18,7 @@ ${BROWSER}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    20
@@ -29,14 +29,10 @@ ${upload_path}    ${CURDIR}/Images/
 TC15: 15_Data_EditReviewAcademicServices
     [Documentation]    Test_15_Data_EditReviewAcademicServices
     [Tags]    EditReviewAcademicServices
-    Set Selenium Speed    2.5
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        ${UNStudent}=    Read Excel Cell    ${i}    2
-        ${UNStudent}=    Evaluate    '' if $UNStudent in ['None', '', None] else $UNStudent
-        # 1) เคลียร์ review data ก่อนทุกครั้ง
-        Clear Review Data In DB    ${UNStudent}
+        Clear Review Data In DB    ${i}
         Run EditReviewAcademicServices   ${i}    
     END
 

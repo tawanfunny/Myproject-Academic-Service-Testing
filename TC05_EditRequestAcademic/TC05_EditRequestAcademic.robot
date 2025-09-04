@@ -20,7 +20,6 @@ ${cols}    13
 TC05: 05_Data_EditRequestAcademic
     [Documentation]    Test_05_Data_EditRequestAcademic
     [Tags]    Edit_Request_Academic
-    Set Selenium Speed    1
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1

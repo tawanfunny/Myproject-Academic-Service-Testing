@@ -19,7 +19,7 @@ ${BROWSER}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    144
@@ -29,7 +29,7 @@ ${cols}    26
 TC10: 10_Data_AddProposal
     [Documentation]    Test_10_Data_AddProposal
     [Tags]    Data_AddProposal
-    Set Selenium Speed    2.5
+
     Go To Academic_Services    ${datatable}    
     
     FOR    ${i}    IN RANGE    2    ${rows}+1

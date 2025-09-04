@@ -18,7 +18,7 @@ ${BROWSER}    Chrome
 ${DB_TYPE}    pymysql
 ${DB_NAME}    db_academic_services
 ${DB_USER}    root
-${DB_PASS}    1234
+${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
 ${rows}    18
@@ -32,11 +32,7 @@ TC13: 13_Data_EditUploadCompleteReport
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        ${UNStudent}=    Read Excel Cell    ${i}    2
-        ${UNStudent}=    Evaluate    '' if $UNStudent in ['None', '', None] else $UNStudent
-
-        # 1) เคลียร์ report data ก่อนทุกครั้ง
-        Clear Report Data In DB    ${UNStudent}
+        Clear Report Data In DB    ${i}
         Run EditUploadCompleteReport   ${i}    
     END
 
