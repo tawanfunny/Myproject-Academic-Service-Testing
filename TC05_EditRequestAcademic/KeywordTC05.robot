@@ -49,7 +49,7 @@ Login As Member
 Go To Edit Request Page
     [Arguments]    ${i}
     Click Element    //div[@class='side-link'][3]
-    Click Element    //tbody/tr[144]/td[8]/a[1]/img[1]
+    Click Element    //tbody/tr[1]/td[8]/a[1]/img[1]
     Sleep    2
 
 Fill Request Form
