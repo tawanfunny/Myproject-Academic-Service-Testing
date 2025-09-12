@@ -21,12 +21,12 @@ ${DB_USER}    root
 ${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
-${rows}    20
+${rows}    29
 ${cols}    13
 ${upload_path}    ${CURDIR}/Images/
 
 *** Test Cases ***
-TC14: 14_Data_ReviewAcademicServices
+TC14: 14_Data_ReviewAcademicService
     [Documentation]    Test_14_Data_ReviewAcademicServices
     [Tags]    ReviewAcademicServices
     Go To Academic_Services    ${datatable}

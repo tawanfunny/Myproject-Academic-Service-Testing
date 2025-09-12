@@ -21,7 +21,7 @@ ${DB_USER}    root
 ${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
-${rows}    20
+${rows}    29
 ${cols}    13
 ${upload_path}    ${CURDIR}/Images/
 
