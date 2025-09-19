@@ -9,6 +9,14 @@ Library    Screenshot
 *** Keywords ***
 Setup Speed
     Set Selenium Speed    0.2
+
+Clear Register_School Data In DB
+    [Arguments]    ${i}
+    ${schoolUsername}=    Read Excel Cell    ${i}    10
+    ${schoolUsername}=    Evaluate    '' if $schoolUsername in ['None', '', None] else $schoolUsername
+    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`school` WHERE schoolId = '${schoolUsername}';
+    Execute Sql String    ${query}
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC01-EC

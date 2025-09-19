@@ -7,6 +7,8 @@ Library    ExcelLibrary
 *** Keywords ***
 Setup Speed
     Set Selenium Speed    0.2
+
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC02-EC

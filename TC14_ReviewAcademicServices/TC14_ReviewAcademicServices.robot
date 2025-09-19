@@ -26,7 +26,7 @@ ${cols}    13
 ${upload_path}    ${CURDIR}/Images/
 
 *** Test Cases ***
-TC14: 14_Data_ReviewAcademicService
+TC14: 14_Data_ReviewAcademicServices
     [Documentation]    Test_14_Data_ReviewAcademicServices
     [Tags]    ReviewAcademicServices
     Go To Academic_Services    ${datatable}

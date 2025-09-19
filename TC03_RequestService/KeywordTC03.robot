@@ -7,6 +7,13 @@ Resource    TC03_RequestService.robot
 Setup Speed
     Set Selenium Speed    0.2
 
+Clear RequestService Data In DB
+    [Arguments]    ${i}
+    ${UNMember}=    Read Excel Cell    ${i}    2
+    ${UNMember}=    Evaluate    '' if $UNMember in ['None', '', None] else $UNMember
+    ${query}=    Set Variable    DELETE FROM request WHERE memberId = '${UNMember}';
+    Execute Sql String    ${query}
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC03-EC

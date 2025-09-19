@@ -6,8 +6,10 @@ Resource    TC17_Data_PreApprovalComment.robot
 *** Keywords ***
 Setup Speed
     Set Selenium Speed    0.2
-
-
+Update PreApprovalComment Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
+    
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC17-EC
@@ -45,7 +47,7 @@ Go To Approved Request
     [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[2]/a[1]
     Select From List By Value    css:#statusApprove    pending
-    Click Element    //tbody/tr[${i}]/td[8]/a[1]/img[1]
+    Click Element    //tbody/tr[1]/td[8]/a[1]/img[1]
     Sleep    2s
 
 Fill Comment Form
@@ -98,7 +100,7 @@ Handle Submission Result
 
 Validate And Write Result
     [Arguments]    ${i}
-    ${ExpectedResult}=    Read Excel Cell    ${i}    4
+    ${ExpectedResult}=    Read Excel Cell    ${i}    5
     ${ExpectedResult}=    Evaluate    '''${ExpectedResult}'''.strip()
     ${ActualMessage}=    Evaluate    '''${ActualMessage}'''.strip()
 
