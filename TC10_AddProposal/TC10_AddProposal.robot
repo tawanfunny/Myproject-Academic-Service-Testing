@@ -39,7 +39,9 @@ TC10: 10_Data_AddProposal
 
         Run Keyword If    '${ALLOW}' == 'Y'
         ...    Run Keywords
-        ...    Clear AddProposal Data In DB    ${i}
+        ...    Clear ProposalID Data In DB
+        ...    AND    Delete AddMember Data In DB    ${i}   
+        ...    AND    Clear AddProposal Data In DB    ${i}
         ...    AND    Run AddProposal    ${i}
 
         Run Keyword If    '${ALLOW}' != 'Y'

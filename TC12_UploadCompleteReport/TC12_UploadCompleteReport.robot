@@ -32,8 +32,17 @@ TC12: 12_UploadCompleteReport
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        Clear Report Data In DB    ${i}
-        Run UploadCompleteReport    ${i}
+        ${ALLOW}=    Read Excel Cell    ${i}    10
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Clear Report Data In DB    ${i}
+        ...    AND    Run UploadCompleteReport    ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}
     END
 
     Save Excel Document    ${datatable}

@@ -2,9 +2,11 @@
 Library    SeleniumLibrary
 Resource    TC07_RegisterStudent.robot
 
+
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
+    
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC07-EC
@@ -28,9 +30,10 @@ Run Register_Student
     ...    AND    Go To Home Page
     
         
- 
     Run Keyword If    '${ALLOW}' != 'Y'
     ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}
+
+
 
 Go To RegisterStudent
     Click Element    //button[contains(text(),'สมัครสมาชิก')]
@@ -62,7 +65,8 @@ Fill Student Registration Form
     ${STDID}=    Evaluate    '' if $STDID in ['None', '', None] else $STDID
     Input Text    css:#studentId   ${STDID}
     Log To Console    Student ID: ${STDID}
-
+    
+    Click Element    css:#eyeIcon
     ${STDPWD}=    Read Excel Cell    ${i}    7
     ${STDPWD}=    Evaluate    '' if $STDPWD in ['None', '', None] else $STDPWD
     Input Text    css:#studentPassword    ${STDPWD}

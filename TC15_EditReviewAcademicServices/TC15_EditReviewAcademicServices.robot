@@ -32,8 +32,17 @@ TC15: 15_Data_EditReviewAcademicServices
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        Clear Review Data In DB    ${i}
-        Run EditReviewAcademicServices   ${i}    
+        ${ALLOW}=    Read Excel Cell    ${i}    11
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Clear Review Data In DB    ${i}
+        ...    AND    Run EditReviewAcademicServices   ${i}    
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}   
     END
 
     Save Excel Document    ${datatable}

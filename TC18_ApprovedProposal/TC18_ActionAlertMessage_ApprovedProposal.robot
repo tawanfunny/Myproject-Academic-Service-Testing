@@ -35,14 +35,17 @@ TC18: 18_ActionAlertMessage_ApprovedProposal
     [Tags]    ActionAlertMessage_ApprovedProposal
     Go To Academic_Services    ${datatable}
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        Setup Speed
-        Login As Lecturer
-        Go To Approved Proposal    ${i}
-        Fill Comment Form    ${i}    
-        Read Expected Result From Excel    ${i}     
-        Click Approved Button And Capture Alert    ${i}
-        Compare And Write Result To Excel    ${i}
-        Go To Logout
+        ${ALLOW}=    Read Excel Cell    ${i}    8
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Update Status Data In DB
+        ...    AND    Run ActionAlertMessage    ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}   
     END
     
     

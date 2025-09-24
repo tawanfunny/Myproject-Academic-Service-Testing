@@ -6,14 +6,35 @@ Resource    TC18_ActionAlertMessage_ApprovedProposal.robot
 *** Keywords ***
 Setup Speed
     Set Selenium Speed    0.2
+
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.proposal SET proposalStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
      
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC18-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-   
 
+Run ActionAlertMessage
+    [Arguments]    ${row}
+    ${ALLOW}=    Read Excel Cell    ${row}    8
+    ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+    Log To Console    Row ${row} - Allow: ${ALLOW}
+    Run Keyword If    '${ALLOW}' == 'Y'
+    ...    Run Keywords
+    ...    Setup Speed
+    ...    AND    Login As Lecturer
+    ...    AND    Go To Approved Proposal    ${row}
+    ...    AND    Fill Comment Form    ${row}
+    ...    AND    Read Expected Result From Excel    ${row}
+    ...    AND    Click Approved Button And Capture Alert    ${row}
+    ...    AND    Compare And Write Result To Excel   ${row}
+    ...    AND    Go To Logout  
+      
+    Run Keyword If    '${ALLOW}' != 'Y'
+    ...    Log To Console    Skipping row ${row} due to Allow = ${ALLOW}
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
     Click Element    //a[contains(text(),'เข้าสู่ระบบสำหรับอาจารย์')]
@@ -25,7 +46,7 @@ Login As Lecturer
 Go To Approved Proposal
     [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[3]/a[1]
-    Click Element    //tbody/tr[${i}-1]/td[9]/a[1]
+    Click Element    //tbody/tr[1]/td[9]/a[1]
     Sleep    2s
 
 Fill Comment Form

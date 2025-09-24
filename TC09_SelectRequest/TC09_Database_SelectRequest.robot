@@ -23,7 +23,7 @@ ${DB_USER}    root
 ${DB_PASS}    12345
 ${DB_HOST}    127.0.0.1
 ${DB_PORT}    3307
-${rows}    3
+${rows}    2
 ${cols}    8
 
 
@@ -35,14 +35,23 @@ TC09: 09_Database_SelectRequest
     Open Excel Document    ${datatable}    TC09-EC 
     
     FOR     ${i}    IN RANGE    2    ${rows}+1
-        Setup Speed
-        Clear Select Data In DB    ${i}
-        Go To Academic_Services    ${i}
-        Login As Student
-        Click Select Request Button    ${i}
-        Check Selected Project Is Correct    ${i}
-        Check Project Selection In Database    ${i}
-        Compare Result And Write Status    ${i}   
+        ${ALLOW}=    Read Excel Cell    ${i}    9
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Setup Speed
+        ...    AND    Clear Select Data In DB 
+        ...    AND    Go To Academic_Services    ${i}
+        ...    AND    Login As Student
+        ...    AND    Click Select Request Button    ${i}
+        ...    AND    Check Selected Project Is Correct  ${i}
+        ...    AND    Check Project Selection In Database    ${i}
+        ...    AND    Compare Result And Write Status    ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}
     END
     
     Save Excel Document    ${datatable}

@@ -27,6 +27,7 @@ TC07: 07_Data_RegisterStudent
     FOR    ${i}    IN RANGE    2    ${rows}+1
         Run Register_Student    ${i}  
     END
+    
     Save Excel Document    ${datatable}
     Close Browser
     Close Current Excel Document

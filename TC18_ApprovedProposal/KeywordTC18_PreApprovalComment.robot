@@ -8,6 +8,10 @@ Resource    TC18_Data_PreApprovalComment.robot
 Setup Speed
     Set Selenium Speed    0.2
 
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.proposal SET proposalStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
+    
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC18-EC
@@ -44,7 +48,7 @@ Login As Lecturer
 Go To Approved Proposal
     [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[3]/a[1]
-    Click Element    //tbody/tr[${i}+1]/td[9]/a[1]
+    Click Element    //tbody/tr[1]/td[9]/a[1]
     Sleep    2s
 
 Fill Comment Form

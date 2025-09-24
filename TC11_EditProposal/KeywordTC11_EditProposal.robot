@@ -5,7 +5,19 @@ Resource    TC11_EditProposal.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
+
+Clear AddMember Data In DB
+    [Arguments]    ${i}
+    ${STDID}    Read Excel Cell    ${i}    2
+    ${STDID}=    Evaluate    '' if $STDID in ['None', '', None] else $STDID
+    Log To Console    Trying to delete addmember with studentId: ${STDID}
+    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`addmember` WHERE studentCode = '${STDID}';
+    Execute Sql String    ${query}
+
+Clear ProposalID Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.addmember SET proposal_proposalId = NULL;
+    Execute Sql String    ${query}
 
 Go To Academic_Services
     [Arguments]    ${i}

@@ -36,7 +36,6 @@ TC01: 01_Data_RegisterSchool
     Go To Academic_Services    ${datatable}
     
     FOR    ${i}    IN RANGE    2    ${rows}+1
-        Clear Register_School Data In DB     ${i}
         Run Register_School    ${i}
     END
 

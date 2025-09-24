@@ -7,7 +7,9 @@ Resource    TC04_CancelService.robot
 Setup Speed
     Set Selenium Speed    0.2
 
-
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'อนุมัติ';
+    Execute Sql String    ${query}
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -37,12 +39,15 @@ Run CancelService
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords  
     ...    Setup Speed 
+    ...    AND    Go To Login Page
+    ...    AND    Login As Member
+    ...    AND    Go To Cancel Request Page
     ...    AND    Button Cancel Request Page    ${row}
     ...    AND    Fill Cancel Request Form    ${row}
     ...    AND    Submit Cancel Form
     ...    AND    Handle Submission Result    ${row}
     ...    AND    Validate And Write Result    ${row}
-    ...    AND    Go To Page Cancel
+    ...    AND    Go To Logout
     
     Run Keyword If    '${ALLOW}' != 'Y'
     ...    Log To Console    Skipping row ${row} due to Allow = ${ALLOW}
@@ -50,7 +55,7 @@ Run CancelService
 
 Button Cancel Request Page
     [Arguments]    ${i}
-    Click Element    //tbody/tr[${i}-1]/td[9]/a[1]
+    Click Element    //tbody/tr[1]/td[9]/a[1]
     Sleep    2
 
 Fill Cancel Request Form
@@ -127,6 +132,7 @@ Write Suggestion Based On Comparison
 
 
 
-Go To Page Cancel   
-    Click Element    //body/div[1]/div[1]/div[3]/a[1]
+Go To Logout
+    Click Element    //a[contains(text(),'ออกจากระบบ')]
     Sleep    1s
+

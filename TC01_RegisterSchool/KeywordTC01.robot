@@ -10,12 +10,12 @@ Library    Screenshot
 Setup Speed
     Set Selenium Speed    0.2
 
-Clear Register_School Data In DB
-    [Arguments]    ${i}
-    ${schoolUsername}=    Read Excel Cell    ${i}    10
-    ${schoolUsername}=    Evaluate    '' if $schoolUsername in ['None', '', None] else $schoolUsername
-    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`school` WHERE schoolId = '${schoolUsername}';
-    Execute Sql String    ${query}
+# Clear Register_School Data In DB
+#     [Arguments]    ${i}
+#     ${schoolUsername}=    Read Excel Cell    ${i}    10
+#     ${schoolUsername}=    Evaluate    '' if $schoolUsername in ['None', '', None] else $schoolUsername
+#     ${query}=    Set Variable    DELETE FROM `db_academic_services`.`school` WHERE schoolId = '${schoolUsername}';
+#     Execute Sql String    ${query}
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -93,7 +93,8 @@ Fill School Registration Form
     ${EMAIL}=    Evaluate    '' if $EMAIL in ['None', '', None] else $EMAIL
     Input Text    css:#schoolUsername    ${EMAIL}
     log To Console    EMAIL: ${EMAIL}
-
+    
+    Click Element    css:#eyeIcon
     ${PASSWORD}=    Read Excel Cell    ${row}    11
     ${PASSWORD}=    Evaluate    '' if $PASSWORD in ['None', '', None] else $PASSWORD
     Input Text    css:#schoolPassword    ${PASSWORD}

@@ -7,12 +7,36 @@ Resource    TC17_Choice_ApprovedRequest.robot
 Setup Speed
     Set Selenium Speed    0.2
 
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC17-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
-   
+
+Run Choice_ApprovedRequest
+    [Arguments]    ${row}
+    ${ALLOW}=    Read Excel Cell    ${row}    9
+    ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+    Log To Console    Row ${row} - Allow: ${ALLOW}
+    Run Keyword If    '${ALLOW}' == 'Y'
+    ...    Run Keywords
+    ...    Setup Speed 
+    ...    AND    Login As Lecturer
+    ...    AND    Go To Approved Request    
+    ...    AND    Fill Comment Form    ${row}
+    ...    AND    Actions in the options and alerts section    ${row}
+    ...    AND    Read Expected Result From Excel    ${row}
+    ...    AND    Read text from the screen and write it in Excel    ${row}
+    ...    AND    Compare Result And Write Status   ${row}
+    ...    AND    Go To Logout   
+    
+    Run Keyword If    '${ALLOW}' != 'Y'
+    ...    Log To Console    Skipping row ${row} due to Allow = ${ALLOW}
+
 
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -23,10 +47,9 @@ Login As Lecturer
     Handle Alert    ACCEPT 
 
 Go To Approved Request
-    [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[2]/a[1]
     # Select From List By Value    css:#statusApprove    pending
-    Click Element    //tbody/tr[${i}]/td[8]/a[1]/img[1]
+    Click Element    //tbody/tr[2]/td[8]/a[1]/img[1]
     Sleep    2s
 
 Fill Comment Form
@@ -66,8 +89,8 @@ Read Expected Result From Excel
 Read text from the screen and write it in Excel
     [Arguments]    ${i}
     # Wait Until Element Is Visible    xpath=//tbody/tr[${i}]/td[7]/span    10s
-    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    //tbody/tr[${i}]/td[7]/span
-    Scroll Element Into View   //tbody/tr[${i}]/td[7]/span
+    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    //tbody/tr[2]/td[7]/span
+    Scroll Element Into View   //tbody/tr[2]/td[7]/span
     Sleep    3
     Capture Page Screenshot    TC17_ApprovedRequest/Screenshots_Choice_ApprovedRequest/${i}_${ActualMessage}.png
     

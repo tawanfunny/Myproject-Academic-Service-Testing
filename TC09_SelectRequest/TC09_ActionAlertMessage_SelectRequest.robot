@@ -33,12 +33,22 @@ TC09: 09_SelectRequest
     Open Excel Document    ${datatable}    TC09-EC 
     
     FOR     ${i}    IN RANGE    2    ${rows}+1
-        Setup Speed
-        Clear Select Data In DB    ${i}
-        Go To Academic_Services    ${i}
-        Login As Student
-        Click Select Button And Capture Alert    ${i}
-        Compare And Write Result To Excel   ${i}   
+        ${ALLOW}=    Read Excel Cell    ${i}    7
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Setup Speed
+        ...    AND    Update Status Data In DB
+        ...    AND    Clear Select Data In DB 
+        ...    AND    Go To Academic_Services    ${i}
+        ...    AND    Login As Student
+        ...    AND    Click Select Button And Capture Alert    ${i}
+        ...    AND    Compare And Write Result To Excel   ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}
     END
     
     Save Excel Document    ${datatable}

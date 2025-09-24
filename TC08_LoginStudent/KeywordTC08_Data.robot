@@ -5,7 +5,7 @@ Resource    TC08_Data_LoginStudent.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -132,3 +132,4 @@ Write Suggestion Based On Comparison
     ...    Write Excel Cell    ${row}    11    ข้อความแสดงผลถูกต้อง
     ...    ELSE
     ...    Write Excel Cell    ${row}    11    ข้อความไม่ตรงตามที่คาดหวังไว้ ควรแก้ไขเป็น ${ExpectedResult}
+

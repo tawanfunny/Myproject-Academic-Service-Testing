@@ -27,7 +27,8 @@ Run Database_LoginStudent
     ...    AND    Fill Student Login Form    ${row}
     ...    AND    Handle Submission Result    ${row}    
     ...    AND    Validate Database For Login    ${row}    ${UNStudent}    ${PWDStudent}     
-    ...    AND    Compare Result And Write Status    ${row}          
+    ...    AND    Compare Result And Write Status    ${row}   
+     
  
     
     Run Keyword If    '${ALLOW}' != 'Y'

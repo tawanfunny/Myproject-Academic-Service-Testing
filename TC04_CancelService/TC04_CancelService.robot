@@ -7,20 +7,20 @@ Library    OperatingSystem
 Library    DatabaseLibrary
 Library    DateTime
 Resource    KeywordTC04.robot
-# Suite Setup    Connect to Database     ${DB_TYPE}    ${DB_NAME}    ${DB_USER}
-# ...    ${DB_PASS}    ${DB_HOST}    ${DB_PORT}
-# Suite Teardown    Disconnect from Database
+Suite Setup    Connect to Database     ${DB_TYPE}    ${DB_NAME}    ${DB_USER}
+...    ${DB_PASS}    ${DB_HOST}    ${DB_PORT}
+Suite Teardown    Disconnect from Database
 
 *** Variables ***
 ${datatable}    C:/test2/it/Project_Test_AcademicService/TC04_CancelService/04_Data_CancelService.xlsx 
 ${URL}    http://localhost:8080/Academic_Services
 ${BROWSER}    Chrome
-# ${DB_TYPE}    pymysql
-# ${DB_NAME}    db_academic_services
-# ${DB_USER}    root
-# ${DB_PASS}    12345
-# ${DB_HOST}    127.0.0.1
-# ${DB_PORT}    3307
+${DB_TYPE}    pymysql
+${DB_NAME}    db_academic_services
+${DB_USER}    root
+${DB_PASS}    12345
+${DB_HOST}    127.0.0.1
+${DB_PORT}    3307
 ${rows}    30
 ${cols}    11
 
@@ -30,12 +30,20 @@ TC04: 04_Data_CancelService
     [Documentation]    Test_04_Data_CancelService
     [Tags]    Cancel_Service
     Go To Academic_Services    ${datatable}
-    Go To Login Page
-    Login As Member
-    Go To Cancel Request Page
 
-    FOR    ${i}    IN RANGE    2    ${rows}+2
-        Run CancelService    ${i}
+  
+    FOR    ${i}    IN RANGE    2    ${rows}+1
+        ${ALLOW}=    Read Excel Cell    ${i}    9
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Update Status Data In DB
+        ...    AND    Run CancelService    ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}  
     END
 
     Save Excel Document    ${datatable}

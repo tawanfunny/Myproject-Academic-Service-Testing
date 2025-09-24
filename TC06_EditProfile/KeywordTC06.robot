@@ -4,7 +4,7 @@ Resource    TC06_EditProfile.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -14,14 +14,18 @@ Go To Academic_Services
 
 
 Go To Login Page
+    Set Selenium Speed    0.2
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
     Click Element    //a[contains(text(),'เข้าสู่ระบบสำหรับสมาชิกผู้ยื่นคำร้องขอ')] 
 
+
 Login As Member
+    Set Selenium Speed    0.2
     Input Text    //input[@id='uname']    sch@gmail.com
-    Input Text    //input[@id='pwd']   editpwd
+    Input Text    //input[@id='pwd']   Schpwd_.
     Click Button    //body/form[1]/input[3]
     Handle Alert    ACCEPT 
+
 
 Run EditFrofile
     [Arguments]    ${row}
@@ -93,7 +97,8 @@ Fill Edit School Registration Form
     ${EMAIL}=    Evaluate    '' if $EMAIL in ['None', '', None] else $EMAIL
     Input Text    css:#schoolUsername    ${EMAIL}
     log To Console    EMAIL: ${EMAIL}
-
+    
+    Click Element    css:#togglePassword
     ${PASSWORD}=    Read Excel Cell    ${row}    11
     ${PASSWORD}=    Evaluate    '' if $PASSWORD in ['None', '', None] else $PASSWORD
     Input Text    css:#schoolPassword    ${PASSWORD}

@@ -7,6 +7,10 @@ Resource    TC05_EditRequestAcademic.robot
 Setup Speed
     Set Selenium Speed    0.2
 
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC05-EC
@@ -41,7 +45,7 @@ Go To Login Page
     Click Element    //a[contains(text(),'เข้าสู่ระบบสำหรับสมาชิกผู้ยื่นคำร้องขอ')] 
 
 Login As Member
-    Input Text    //input[@id='uname']    Sch1@hotmail.com
+    Input Text    //input[@id='uname']    Sch_ool.1a@gmail.com
     Input Text    //input[@id='pwd']   Schpwd_.  
     Click Button    //body/form[1]/input[3]
     Handle Alert    ACCEPT 

@@ -30,13 +30,24 @@ ${cols}    11
 TC17: 17_Data_PreApprovalComment
     [Documentation]    Test_17_Data_PreApprovalComment
     [Tags]    PreApprovalComment   
-    
+
     Go To Academic_Services    ${datatable}
-    Update PreApprovalComment Data In DB 
-    FOR    ${i}    IN RANGE    2    ${rows}+1          
-        Run PreApprovalComment    ${i}
-    END
     
+    
+    FOR    ${i}    IN RANGE    2    ${rows}+1   
+        ${ALLOW}=    Read Excel Cell    ${i}    9
+        ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+        Log To Console    Row ${i} - Allow: ${ALLOW}
+
+        Run Keyword If    '${ALLOW}' == 'Y'
+        ...    Run Keywords
+        ...    Update Status Data In DB
+        ...    AND    Run PreApprovalComment    ${i}
+
+        Run Keyword If    '${ALLOW}' != 'Y'
+        ...    Log To Console    Skipping row ${i} due to Allow = ${ALLOW}     
+    END
+      
     
     Save Excel Document    ${datatable}
     Close Browser

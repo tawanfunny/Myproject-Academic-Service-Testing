@@ -7,6 +7,18 @@ Resource    TC10_AddProposal.robot
 Setup Speed
     Set Selenium Speed    0.2
 
+Clear ProposalID Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.addmember SET proposal_proposalId = NULL;
+    Execute Sql String    ${query}
+
+Delete AddMember Data In DB
+    [Arguments]    ${i}
+    ${STDID}    Read Excel Cell    ${i}    2
+    ${STDID}=    Evaluate    '' if $STDID in ['None', '', None] else $STDID
+    Log To Console    Trying to delete addmember with studentId: ${STDID}
+    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`addmember` WHERE studentCode = '${STDID}';
+    Execute Sql String    ${query}
+
 Clear AddProposal Data In DB
     [Arguments]    ${i}
     ${STDID}    Read Excel Cell    ${i}    2
@@ -14,6 +26,15 @@ Clear AddProposal Data In DB
     Log To Console    Trying to delete proposal with studentId: ${STDID}
     ${query}=    Set Variable    DELETE FROM `db_academic_services`.`proposal` WHERE studentId = '${STDID}';
     Execute Sql String    ${query}
+
+    # ${query}=    Set Variable    DELETE FROM db_academic_services.proposal WHERE studentId = NULL;
+    # Execute Sql String    ${query}
+
+
+
+# Clear AddMember Data In DB
+#     ${query}=    Set Variable    DELETE FROM db_academic_services.addmember;
+#     Execute Sql String    ${query}
 
 Go To Academic_Services
     [Arguments]    ${i}

@@ -4,14 +4,13 @@ Resource    TC14_ReviewAcademicServices.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
 
 Clear Review Data In DB
     [Arguments]    ${i}
     ${UNStudent}=    Read Excel Cell    ${i}    2
     ${UNStudent}=    Evaluate    '' if $UNStudent in ['None', '', None] else $UNStudent
-    Log To Console    Trying to delete proposal with studentId: ${UNStudent}
-    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`review` WHERE studentId = '${UNStudent}';
+    ${query}=    Set Variable    DELETE FROM `db_academic_services`.`review` WHERE reviewId = '${UNStudent}';
     Execute Sql String    ${query}
     # ${query}=    Set Variable    UPDATE review SET activityImg = NULL WHERE studentId = '${student_id}';
     # Execute Sql String    ${query}

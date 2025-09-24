@@ -28,7 +28,8 @@ Run EditUploadCompleteReport
 
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Go To Login Page
+    ...    Setup Speed
+    ...    AND    Go To Login Page
     ...    AND    Login As Student    ${row}
     ...    AND    Go To Edit Upload Complete Report Page
     ...    AND    Edit Upload Complete Report    ${row}

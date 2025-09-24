@@ -6,15 +6,21 @@ Resource    TC17_Data_PreApprovalComment.robot
 *** Keywords ***
 Setup Speed
     Set Selenium Speed    0.2
-Update PreApprovalComment Data In DB
+    
+# Clear CommentRequest Data In DB
+#     ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET comment_request_id = NULL;
+#     Execute Sql String    ${query}
+
+Update Status Data In DB
     ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'รออนุมัติ';
     Execute Sql String    ${query}
-    
+
 Go To Academic_Services
     [Arguments]    ${row}
     Open Excel Document    ${datatable}    TC17-EC
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
+
 
 Run PreApprovalComment
     [Arguments]    ${row}
@@ -23,7 +29,7 @@ Run PreApprovalComment
     Log To Console    Row ${row} - Allow: ${ALLOW}
     Run Keyword If    '${ALLOW}' == 'Y'
     ...    Run Keywords
-    ...    Setup Speed
+    ...    Setup Speed 
     ...    AND    Login As Lecturer
     ...    AND    Go To Approved Request    ${row}
     ...    AND    Fill Comment Form    ${row}

@@ -4,7 +4,7 @@ Resource    TC12_UploadCompleteReport.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.3
 
 Clear Report Data In DB
     [Arguments]    ${i}
@@ -13,8 +13,6 @@ Clear Report Data In DB
     Log To Console    Trying to delete proposal with studentId: ${UNStudent}
     ${query}=    Set Variable    DELETE FROM `db_academic_services`.`report` WHERE studentId = '${UNStudent}';
     Execute Sql String    ${query}
-
-
 
 # --- Browser Flow ---
 Go To Academic_Services

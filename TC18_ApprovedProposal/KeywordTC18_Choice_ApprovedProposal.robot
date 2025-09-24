@@ -5,7 +5,12 @@ Resource    TC18_Choice_ApprovedProposal.robot
 
 *** Keywords ***
 Setup Speed
-    Set Selenium Speed    0.2
+    Set Selenium Speed    0.4
+
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.proposal SET proposalStatus = 'รออนุมัติ';
+    Execute Sql String    ${query}
+     
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -13,6 +18,25 @@ Go To Academic_Services
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
 
+Run Choice_Approvedproposal
+    [Arguments]    ${row}
+    ${ALLOW}=    Read Excel Cell    ${row}    8
+    ${ALLOW}=    Evaluate    '' if $ALLOW in ['None', '', None] else $ALLOW.strip()
+    Log To Console    Row ${row} - Allow: ${ALLOW}
+    Run Keyword If    '${ALLOW}' == 'Y'
+    ...    Run Keywords
+    ...    Setup Speed
+    ...    AND    Login As Lecturer
+    ...    AND    Go To Approved Proposal    ${row}
+    ...    AND    Fill Comment Form    ${row}
+    ...    AND    Read Expected Result From Excel    ${row}
+    ...    AND    Click Approved Button And Capture Alert    ${row}
+    ...    AND    Read text from the screen and write it in Excel    ${row}
+    ...    AND    Compare And Write Result To Excel   ${row}
+    ...    AND    Go To Logout   
+    
+    Run Keyword If    '${ALLOW}' != 'Y'
+    ...    Log To Console    Skipping row ${row} due to Allow = ${ALLOW}
 
 Login As Lecturer
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
@@ -25,7 +49,7 @@ Login As Lecturer
 Go To Approved Proposal
     [Arguments]    ${i}
     Click Element    //body/div[1]/div[1]/div[3]/a[1]
-    Click Element    //tbody/tr[${i}+2]/td[9]/a[1]
+    Click Element    //tbody/tr[1]/td[9]/a[1]
     Sleep    3s
 
 Fill Comment Form
@@ -49,18 +73,18 @@ Click Approved Button And Capture Alert
     ${status}    ${message}=    Run Keyword And Ignore Error    Handle Alert    ACCEPT
     Run Keyword If    '${status}' == 'PASS'    Set Suite Variable    ${ActualMessage}    ${message}
     Run Keyword If    '${status}' != 'PASS'    Set Suite Variable    ${ActualMessage}    Alert Not Found
-    Capture Page Screenshot    Project_Test_AcademicService/TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png
+    Capture Page Screenshot    TC18_ApprovedProposal/Screenshots_ActionAlertMessage/${i}_ActionAlert.png
 
     Write Excel Cell    ${i}    6    ${ActualMessage}
 
 Read text from the screen and write it in Excel
     [Arguments]    ${i}
-    Wait Until Element Is Visible    xpath=//tbody/tr[${i}+2]/td[8]/span[1]    10s
-    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    xpath=//tbody/tr[${i}+2]/td[8]/span[1]
+    Wait Until Element Is Visible    xpath=//tbody/tr[1]/td[8]/span[1]    10s
+    ${status}    ${ActualMessage}=    Run Keyword And Ignore Error    Get Text    xpath=//tbody/tr[1]/td[8]/span[1]
     Sleep    2
     Execute JavaScript    window.scrollTo(0, 300)
     Capture Page Screenshot    TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}.png
-    Capture Element Screenshot    xpath=//tbody/tr[${i}+2]/td[8]/span[1]    TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}_Zoom.png
+    Capture Element Screenshot    xpath=//tbody/tr[1]/td[8]/span[1]    TC18_ApprovedProposal/Screenshots_Choice_ApprovedProposal/${i}_${ActualMessage}_Zoom.png
     write Excel Cell    ${i}    6    ${ActualMessage}
     Log To Console    Actual Message: ${ActualMessage}
     Set Suite Variable    ${ActualMessage}
@@ -79,9 +103,9 @@ Write Suggestion Based On Comparison
     ${ActualMessage}=     Evaluate    '''${ActualMessage}'''.strip()
     ${is_match}=    Run Keyword And Return Status    Should Be Equal As Strings    ${ExpectedResult}    ${ActualMessage}
     Run Keyword If    ${is_match}
-    ...    Write Excel Cell    ${row}    9    ข้อความแสดงผลถูกต้อง
+    ...    Write Excel Cell    ${row}    10    ข้อความแสดงผลถูกต้อง
     ...    ELSE
-    ...    Write Excel Cell    ${row}    9    ข้อความไม่ตรงตามที่คาดหวังไว้ ควรแก้ไขเป็น ${ExpectedResult}
+    ...    Write Excel Cell    ${row}    10    ข้อความไม่ตรงตามที่คาดหวังไว้ ควรแก้ไขเป็น ${ExpectedResult}
 
 
 Go To Logout

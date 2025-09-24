@@ -6,12 +6,20 @@ Resource    TC09_ActionAlertMessage_SelectRequest.robot
 Setup Speed
     Set Selenium Speed    0.2
 
-Clear Select Data In DB
-    [Arguments]    ${i}
-    ${student_id}=    Read Excel Cell    ${i}    2
-    ${student_id}=    Evaluate    '' if $student_id in ['None', '', None] else $student_id
-    ${query}=    Set Variable    UPDATE student SET requestId = NULL WHERE studentId = '${student_id}';
+Update Status Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.requestservice SET requestStatus = 'อนุมัติ';
     Execute Sql String    ${query}
+
+Clear Select Data In DB
+    ${query}=    Set Variable    UPDATE db_academic_services.student SET requestId = NULL;
+    Execute Sql String    ${query}
+
+# Clear Select Data In DB
+#     [Arguments]    ${i}
+#     ${student_id}=    Read Excel Cell    ${i}    2
+#     ${student_id}=    Evaluate    '' if $student_id in ['None', '', None] else $student_id
+#     ${query}=    Set Variable    UPDATE student SET requestId = NULL WHERE studentId = '${student_id}';
+#     Execute Sql String    ${query}
 
 Go To Academic_Services
     [Arguments]    ${row}
@@ -22,8 +30,8 @@ Go To Academic_Services
 Login As Student
     Click Element    //button[contains(text(),'เข้าสู่ระบบ')]
     Click Element    //a[contains(text(),'เข้าสู่ระบบสำหรับนักศึกษา')]
-    Input Text    css:#stuname    6504106322        
-    Input Text    css:#stupwd    6504106322
+    Input Text    css:#stuname    6501233840        
+    Input Text    css:#stupwd    6503106364
     Click Button    //body/form[1]/input[3]
     Handle Alert    ACCEPT
 
@@ -35,7 +43,7 @@ Read Expected Result From Excel
 
 Click Select Button And Capture Alert
     [Arguments]    ${i}  
-    Click Element    //tbody/tr[${i}+1]/td[6]/form[1]/button[1]
+    Click Element    //tbody/tr[1]/td[6]/form[1]/button[1]
     Sleep    1s
     ${status}    ${message}=    Run Keyword And Ignore Error    Handle Alert    ACCEPT
     Run Keyword If    '${status}' == 'PASS'    Set Suite Variable    ${ActualMessage}    ${message}
